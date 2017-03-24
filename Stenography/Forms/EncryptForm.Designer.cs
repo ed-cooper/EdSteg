@@ -80,6 +80,7 @@
             this.BtnBaseBrowse.TabIndex = 3;
             this.BtnBaseBrowse.Text = "Browse";
             this.BtnBaseBrowse.UseVisualStyleBackColor = true;
+            this.BtnBaseBrowse.Click += new System.EventHandler(this.BtnBaseBrowse_Click);
             // 
             // LblBasePath
             // 
@@ -101,6 +102,7 @@
             this.BtnSaveBrowse.TabIndex = 5;
             this.BtnSaveBrowse.Text = "Browse";
             this.BtnSaveBrowse.UseVisualStyleBackColor = true;
+            this.BtnSaveBrowse.Click += new System.EventHandler(this.BtnSaveBrowse_Click);
             // 
             // LblSave
             // 
@@ -132,6 +134,7 @@
             this.BtnGo.TabIndex = 8;
             this.BtnGo.Text = "Go";
             this.BtnGo.UseVisualStyleBackColor = true;
+            this.BtnGo.Click += new System.EventHandler(this.BtnGo_Click);
             // 
             // PnlAction
             // 
