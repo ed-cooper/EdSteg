@@ -32,7 +32,7 @@ namespace Stenography.Encryption
         /// <returns>The encrypted version of the plain text.</returns>
         public byte[] Encrypt(byte[] plainText)
         {
-            
+            return Crypt(plainText);
         }
 
         /// <summary>
@@ -42,7 +42,7 @@ namespace Stenography.Encryption
         /// <returns>The original plain text.</returns>
         public byte[] Decrypt(byte[] cipherText)
         {
-
+            return Crypt(cipherText);
         }
 
         /// <summary>
