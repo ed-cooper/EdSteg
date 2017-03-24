@@ -42,7 +42,39 @@ namespace Stenography.Forms
 
         private void BtnGo_Click(object sender, EventArgs e)
         {
+            if (CheckInputs())
+            {
 
+            }
+        }
+        
+        /// <summary>
+        /// Checks if the inputs submitted are valid and displays any error messages.
+        /// </summary>
+        /// <returns>Whether the inputs were valid.</returns>
+        protected virtual bool CheckInputs()
+        {
+            if (string.IsNullOrEmpty(TxtMessage.Text))
+            {
+                // No message
+                MessageBox.Show("Please enter a message to show");
+                return false;
+            }
+            else if (string.IsNullOrEmpty((string)LblOriginalPath.Tag))
+            {
+                // No original file
+                MessageBox.Show("Please select the original file to hide the data inside");
+                return false;
+            }
+            else if (string.IsNullOrEmpty((string)LblSavePath.Tag))
+            {
+                // No save file
+                MessageBox.Show("Please select a path to save the new file to");
+                return false;
+            }
+
+            // Validation successful
+            return true;
         }
         #endregion
     }
