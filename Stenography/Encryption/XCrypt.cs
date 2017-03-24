@@ -50,11 +50,11 @@ namespace Stenography.Encryption
         {
             if (Key != null && Key.Length > 0)
             {
-                byte[] cipher = new byte[data.Length - 1];
+                byte[] cipher = new byte[data.Length];
 
                 for (int i = 0; i < data.Length; i++)
                 {
-                    cipher[i] = (byte)((int)data[i] ^ (int)Key[i % Key.Length]);
+                    cipher[i] = (byte)(data[i] ^ Key[i % Key.Length]);
                 }
 
                 return cipher;
