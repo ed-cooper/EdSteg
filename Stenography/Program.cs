@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using System.Text;
 using Stenography.Storage;
+using Stenography.Forms;
 
 namespace Stenography
 {
@@ -14,6 +15,9 @@ namespace Stenography
         [STAThread]
         static void Main()
         {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+            Application.Run(new FormMain());
             Console.Write("Enter plain text: ");
             string plain = Console.ReadLine();
             Console.Write("Enter key: ");

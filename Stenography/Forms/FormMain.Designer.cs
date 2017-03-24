@@ -108,6 +108,7 @@
             this.BtnEncrypt.TabIndex = 7;
             this.BtnEncrypt.Text = "Encrypt";
             this.BtnEncrypt.UseVisualStyleBackColor = true;
+            this.BtnEncrypt.Click += new System.EventHandler(this.BtnEncrypt_Click);
             // 
             // BtnDecrypt
             // 
@@ -118,6 +119,7 @@
             this.BtnDecrypt.TabIndex = 8;
             this.BtnDecrypt.Text = "Decrypt";
             this.BtnDecrypt.UseVisualStyleBackColor = true;
+            this.BtnDecrypt.Click += new System.EventHandler(this.BtnDecrypt_Click);
             // 
             // FormMain
             // 
