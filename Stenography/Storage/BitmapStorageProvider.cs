@@ -173,6 +173,7 @@ namespace Stenography.Storage
             int length;
             if (BitConverter.IsLittleEndian)
             {
+                // Reverse order of bytes for little endian systems
                 length = BitConverter.ToInt32(new byte[4] {
                     byteData[3],
                     byteData[2],
@@ -182,6 +183,7 @@ namespace Stenography.Storage
             }
             else
             {
+                // Read bytes straight
                 length = BitConverter.ToInt32(byteData, 0);
             }
             
