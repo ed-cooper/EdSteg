@@ -21,7 +21,7 @@
         /// </summary>
         /// <param name="cipherText">The cipher text to decrypt.</param>
         /// <returns>The original plain text.</returns>
-        string Decrypt(byte[] cipherText);
+        byte[] Decrypt(byte[] cipherText);
         #endregion
     }
 }

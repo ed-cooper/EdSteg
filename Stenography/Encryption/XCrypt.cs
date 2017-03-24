@@ -40,7 +40,7 @@ namespace Stenography.Encryption
         /// </summary>
         /// <param name="cipherText">The cipher text to decrypt.</param>
         /// <returns>The original plain text.</returns>
-        public string Decrypt(byte[] cipherText)
+        public byte[] Decrypt(byte[] cipherText)
         {
 
         }
