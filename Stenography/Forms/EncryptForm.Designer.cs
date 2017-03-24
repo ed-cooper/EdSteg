@@ -52,6 +52,9 @@
             // 
             // TxtMessage
             // 
+            this.TxtMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.TxtMessage.Location = new System.Drawing.Point(98, 12);
             this.TxtMessage.Multiline = true;
             this.TxtMessage.Name = "TxtMessage";
@@ -60,6 +63,7 @@
             // 
             // LblBase
             // 
+            this.LblBase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LblBase.AutoSize = true;
             this.LblBase.Location = new System.Drawing.Point(12, 140);
             this.LblBase.Name = "LblBase";
@@ -69,6 +73,7 @@
             // 
             // BtnBaseBrowse
             // 
+            this.BtnBaseBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.BtnBaseBrowse.Location = new System.Drawing.Point(98, 135);
             this.BtnBaseBrowse.Name = "BtnBaseBrowse";
             this.BtnBaseBrowse.Size = new System.Drawing.Size(55, 23);
@@ -78,6 +83,8 @@
             // 
             // LblBasePath
             // 
+            this.LblBasePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LblBasePath.AutoSize = true;
             this.LblBasePath.Location = new System.Drawing.Point(159, 140);
             this.LblBasePath.Name = "LblBasePath";
@@ -87,6 +94,7 @@
             // 
             // BtnSaveBrowse
             // 
+            this.BtnSaveBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.BtnSaveBrowse.Location = new System.Drawing.Point(98, 164);
             this.BtnSaveBrowse.Name = "BtnSaveBrowse";
             this.BtnSaveBrowse.Size = new System.Drawing.Size(55, 23);
@@ -96,6 +104,7 @@
             // 
             // LblSave
             // 
+            this.LblSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LblSave.AutoSize = true;
             this.LblSave.Location = new System.Drawing.Point(12, 169);
             this.LblSave.Name = "LblSave";
@@ -105,6 +114,8 @@
             // 
             // LblSavePath
             // 
+            this.LblSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LblSavePath.AutoSize = true;
             this.LblSavePath.Location = new System.Drawing.Point(159, 169);
             this.LblSavePath.Name = "LblSavePath";
@@ -114,6 +125,7 @@
             // 
             // BtnGo
             // 
+            this.BtnGo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.BtnGo.Location = new System.Drawing.Point(271, 13);
             this.BtnGo.Name = "BtnGo";
             this.BtnGo.Size = new System.Drawing.Size(55, 23);
@@ -145,6 +157,7 @@
             this.Controls.Add(this.LblBase);
             this.Controls.Add(this.TxtMessage);
             this.Controls.Add(this.LblMessage);
+            this.MinimumSize = new System.Drawing.Size(354, 296);
             this.Name = "EncryptForm";
             this.Text = "Encrypt";
             this.PnlAction.ResumeLayout(false);
