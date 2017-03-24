@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Stenography.Encryption;
 using System.Text;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Collections;
 
 namespace Stenography
 {
@@ -24,9 +27,57 @@ namespace Stenography
             IEncryptionProvider crypt = new XCrypt(Encoding.Default.GetBytes(key));
             byte[] cipher = crypt.Encrypt(Encoding.Default.GetBytes(plain));
             Console.WriteLine("Encrypted: " + Encoding.Default.GetString(cipher));
-            Console.WriteLine("Decrypted: " + Encoding.Default.GetString(crypt.Decrypt(cipher)));
-            Console.Read();
+            OpenFileDialog openFile = new OpenFileDialog();
+            if (openFile.ShowDialog() == DialogResult.OK)
+            {
+                Console.WriteLine("File selected: " + openFile.FileName);
+                Bitmap image = new Bitmap(openFile.FileName);
+                unsafe
+                {
+                    BitmapData bmpData = image.LockBits(
+                        new Rectangle(0, 0, image.Width, image.Height),
+                        ImageLockMode.ReadWrite,
+                        PixelFormat.Format32bppArgb // Actual format is bgra
+                    );
+                    byte bytesPerChannel = 1;
+                    byte bytesPerPixel = 4;
+                    byte* scan0 = (byte*)bmpData.Scan0;
+                    uint index = 0;
+                    for (int i = 0; i < bmpData.Height; i++)
+                    {
+                        for (int j = 0; j < bmpData.Width * bytesPerPixel; j++)
+                        {
+                            byte* channel = scan0 + i * bmpData.Stride + j * bytesPerChannel;
+                            if (index % 4 != 4) // Check not alpha channel
+                            {
+                                *channel = (*channel).SetBit(7, false);
+                            }
+                            index++;
+                        }
+                    }
 
+                    image.UnlockBits(bmpData);
+                }
+
+                image.Save("test.png");
+            }
+            else
+            {
+                Console.WriteLine("Operation cancelled");
+            }
+        }
+
+        static byte SetBit(this byte original, int pos, bool value)
+        {
+            if (value)
+                return (byte)(original | 1 << pos);
+
+            return (byte)(original & ~(1 << pos));
+        }
+
+        static bool GetBit(this byte value, int pos)
+        {
+            return (value & 1 << pos) != 0;
         }
     }
 }
