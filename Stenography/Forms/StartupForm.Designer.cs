@@ -1,6 +1,6 @@
 ﻿namespace Stenography.Forms
 {
-    partial class FormMain
+    partial class StartupForm
     {
         /// <summary>
         /// Required designer variable.

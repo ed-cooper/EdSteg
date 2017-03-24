@@ -17,7 +17,7 @@ namespace Stenography
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new FormMain());
+            Application.Run(new StartupForm());
             Console.Write("Enter plain text: ");
             string plain = Console.ReadLine();
             Console.Write("Enter key: ");

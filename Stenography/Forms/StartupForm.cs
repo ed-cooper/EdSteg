@@ -10,10 +10,10 @@ using System.Windows.Forms;
 
 namespace Stenography.Forms
 {
-    public partial class FormMain : Form
+    public partial class StartupForm : Form
     {
         #region Constructor
-        public FormMain()
+        public StartupForm()
         {
             InitializeComponent();
         }
