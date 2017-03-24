@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Stenography.Encryption;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -58,6 +59,23 @@ namespace Stenography.Forms
 
             // Validation successful
             return true;
+        }
+
+        /// <summary>
+        /// Returns the selected <see cref="IEncryptionProvider"/> object.
+        /// </summary>
+        /// <returns>The selected <see cref="IEncryptionProvider"/> object.</returns>
+        protected virtual IEncryptionProvider GetEncrpytionProvider()
+        {
+            byte[] key = Encoding.Default.GetBytes(TxtKey.Text);
+
+            switch (CmbEncryption.SelectedIndex)
+            {
+                case 0: // XOR Crypt (default)
+                    return new XCrypt(key);
+                default:
+                    throw new ArgumentException("Unknown selected index for CmbEncryption");
+            }
         }
         #endregion
     }
