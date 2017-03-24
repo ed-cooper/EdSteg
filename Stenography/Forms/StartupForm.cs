@@ -28,7 +28,7 @@ namespace Stenography.Forms
 
         private void BtnEncrypt_Click(object sender, EventArgs e)
         {
-
+            new EncryptForm().ShowDialog();
         }
 
         private void BtnDecrypt_Click(object sender, EventArgs e)
