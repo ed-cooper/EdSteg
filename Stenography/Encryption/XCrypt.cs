@@ -9,10 +9,10 @@ namespace Stenography.Encryption
     public class XCrypt : IEncryptionProvider
     {
         #region Properties
-        public string Key { get; set; }
+        public byte[] Key { get; set; }
         #endregion
         #region Constructor
-        public XCrypt(string key)
+        public XCrypt(byte[] key)
         {
             Key = key;
         }

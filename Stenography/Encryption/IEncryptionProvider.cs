@@ -6,7 +6,7 @@
         /// <summary>
         /// Gets or sets the key used for encryption.
         /// </summary>
-        string Key { get; set; }
+        byte[] Key { get; set; }
         #endregion
         #region Functions
         /// <summary>
