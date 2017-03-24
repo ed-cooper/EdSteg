@@ -1,4 +1,5 @@
 ﻿using Stenography.Encryption;
+using Stenography.Storage;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -75,6 +76,21 @@ namespace Stenography.Forms
                     return new XCrypt(key);
                 default:
                     throw new ArgumentException("Unknown selected index for CmbEncryption");
+            }
+        }
+
+        /// <summary>
+        /// Returns the selected <see cref="IStorageProvider"/> object. 
+        /// </summary>
+        /// <returns>The selected <see cref="IStorageProvider"/> object.</returns>
+        protected virtual IStorageProvider GetStorageProvder()
+        {
+            switch (CmbStorage.SelectedIndex)
+            {
+                case 0: // LSB (default)
+                    return new BitmapStorageProvider();
+                default:
+                    throw new ArgumentException("Unknown selected index for CmbStorage");
             }
         }
         #endregion
