@@ -34,8 +34,20 @@ namespace Stenography.Storage
         /// <param name="data">The data to save.</param>
         public unsafe void Save(string file, string newPath, byte[] data)
         {
+            // Create file header (stores data length)
+            byte[] header = BitConverter.GetBytes(data.Length);
+
+            // If on big endian system, switch to little endian
+            if (BitConverter.IsLittleEndian)
+                Array.Reverse(header);
+
             // Get raw save data
-            BitArray bitData = new BitArray(data);
+            byte[] allData = new byte[header.Length + data.Length];
+            header.CopyTo(allData, 0);
+            data.CopyTo(allData, header.Length);
+
+            // Get individual bits from bit data
+            BitArray bitData = new BitArray(allData);
 
             // Load image from file
             Bitmap image = new Bitmap(file);
