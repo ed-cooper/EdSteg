@@ -1,6 +1,6 @@
 ﻿namespace Stenography.Utils
 {
-    static class BinaryUtils
+    public static class BinaryUtils
     {
         #region Methods
         /// <summary>

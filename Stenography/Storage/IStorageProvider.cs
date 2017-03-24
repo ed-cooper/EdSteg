@@ -1,6 +1,6 @@
 ﻿namespace Stenography.Storage
 {
-    interface IStorageProvider
+    public interface IStorageProvider
     {
         /// <summary>
         /// Saves the specified data to the specified file.

@@ -1,6 +1,6 @@
 ﻿namespace Stenography.Encryption
 {
-    interface IEncryptionProvider
+    public interface IEncryptionProvider
     {
         #region Properties
         /// <summary>

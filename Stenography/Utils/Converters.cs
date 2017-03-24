@@ -1,6 +1,6 @@
 ﻿namespace Stenography.Utils
 {
-    static class Converters
+    public static class Converters
     {
         /// <summary>
         /// Converts the specified boolean array into a byte array, where each boolean is 1 bit.
