@@ -1,6 +1,7 @@
 ﻿using Stenography.Utils;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 
@@ -131,6 +132,9 @@ namespace Stenography.Storage
                 PixelDataFormat
             );
 
+            // Store raw data from image
+            List<bool> rawData = new List<bool>();
+
             // Scan start position
             byte* scan0 = (byte*)bmpData.Scan0;
 
@@ -149,7 +153,8 @@ namespace Stenography.Storage
                     // Check not alpha channel (last channel)
                     if (byteCount % BytesPerPixel != BytesPerPixel)
                     {
-                        // Read data
+                        // Store current bit
+                        rawData.Add((*scan).GetBit(0));
                     }
 
                     // Increment byte counter
