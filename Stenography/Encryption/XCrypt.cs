@@ -32,7 +32,7 @@ namespace Stenography.Encryption
         /// <returns>The encrypted version of the plain text.</returns>
         public byte[] Encrypt(byte[] plainText)
         {
-
+            
         }
 
         /// <summary>
@@ -44,5 +44,23 @@ namespace Stenography.Encryption
         {
 
         }
+
+        /// <summary>
+        /// Encrypts or decrypts the data.
+        /// </summary>
+        /// <param name="data">The data to crypt.</param>
+        /// <returns>The crypted data.</returns>
+        protected virtual byte[] Crypt(byte[] data)
+        {
+            if (Key != null && Key.Length > 0)
+            {
+
+            }
+            else
+            {
+                throw new InvalidOperationException("Invalid key");
+            }
+        }
+        #endregion
     }
 }
