@@ -81,7 +81,15 @@ namespace Stenography.Storage
                     if (byteCount % BytesPerPixel != BytesPerPixel)
                     {
                         // Get value to store
-                        bool value = bitData[dataPos];
+                        bool value;
+                        if (dataPos < bitData.Length)
+                        {
+                            value = bitData[dataPos];
+                        }
+                        else
+                        {
+                            value = false;
+                        }
 
                         // Set LSB to value
                         *scan = (*scan).SetBit(0, value);
