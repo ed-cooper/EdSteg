@@ -28,12 +28,13 @@ namespace Stenography.Storage
         /// <summary>
         /// Saves the specified data to the specified file.
         /// </summary>
-        /// <param name="path">The file to save the data to.</param>
+        /// <param name="file">The file to use as the base.</param>
+        /// <param name="newPath">The path of the file to create.</param>
         /// <param name="data">The data to save.</param>
-        public unsafe void Save(string path, byte[] data)
+        public unsafe void Save(string file, string newPath, byte[] data)
         {
             // Load image from file
-            Bitmap image = new Bitmap(path);
+            Bitmap image = new Bitmap(file);
 
             // Get bitmap data and lock in memory
             BitmapData bmpData = image.LockBits(
@@ -71,6 +72,9 @@ namespace Stenography.Storage
 
             // Store new data and unlock memory
             image.UnlockBits(bmpData);
+
+            // Save bitmap
+            image.Save(newPath);
         }
 
         /// <summary>
