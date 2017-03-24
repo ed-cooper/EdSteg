@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Stenography.Encryption;
+using Stenography.Utils;
+using System;
+using System.Collections;
 using System.Collections.Generic;
-
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Stenography.Encryption;
 using System.Text;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Collections;
 
 namespace Stenography
 {
@@ -65,19 +65,6 @@ namespace Stenography
             {
                 Console.WriteLine("Operation cancelled");
             }
-        }
-
-        static byte SetBit(this byte original, int pos, bool value)
-        {
-            if (value)
-                return (byte)(original | 1 << pos);
-
-            return (byte)(original & ~(1 << pos));
-        }
-
-        static bool GetBit(this byte value, int pos)
-        {
-            return (value & 1 << pos) != 0;
         }
     }
 }
