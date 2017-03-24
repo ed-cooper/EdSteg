@@ -85,6 +85,9 @@ namespace Stenography.Storage
                         if (dataPos < bitData.Length)
                         {
                             value = bitData[dataPos];
+
+                            // Increment data pos
+                            dataPos++;
                         }
                         else
                         {
@@ -93,9 +96,6 @@ namespace Stenography.Storage
 
                         // Set LSB to value
                         *scan = (*scan).SetBit(0, value);
-
-                        // Increment data pos
-                        dataPos++;
                     }
 
                     // Increment byte counter
