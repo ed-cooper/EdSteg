@@ -1,12 +1,5 @@
 ﻿using Stenography.Encryption;
-using Stenography.Utils;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Drawing.Imaging;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Text;
 using Stenography.Storage;
