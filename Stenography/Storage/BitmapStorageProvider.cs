@@ -81,8 +81,8 @@ namespace Stenography.Storage
                     // Get pointer to current byte
                     byte* scan = scan0 + i * bmpData.Stride + j * BytesPerChannel;
 
-                    // Check not alpha channel (last channel)
-                    if (byteCount % BytesPerPixel != BytesPerPixel)
+                    // Check current byte isn't alpha channel (last channel)
+                    if (byteCount % BytesPerPixel != BytesPerPixel - 1)
                     {
                         // Get value to store
                         bool value;
@@ -150,8 +150,8 @@ namespace Stenography.Storage
                     // Get pointer to current byte
                     byte* scan = scan0 + i * bmpData.Stride + j * BytesPerChannel;
 
-                    // Check not alpha channel (last channel)
-                    if (byteCount % BytesPerPixel != BytesPerPixel)
+                    // Check current byte isn't alpha channel (last channel)
+                    if (byteCount % BytesPerPixel != BytesPerPixel - 1)
                     {
                         // Store current bit
                         rawData.Add((*scan).GetBit(0));
