@@ -36,11 +36,18 @@ namespace Stenography
                 IStorageProvider storageProvider = new BitmapStorageProvider();
 
                 storageProvider.Save(openFile.FileName, "test.png", cipher);
+                Console.WriteLine("File saved");
+                Console.WriteLine("Reading file");
+                cipher = storageProvider.Read("test.png");
+                Console.WriteLine("Read cipher text: " + Encoding.Default.GetString(cipher));
+                Console.WriteLine("Decrypted: " + Encoding.Default.GetString(crypt.Decrypt(cipher)));
             }
             else
             {
                 Console.WriteLine("Operation cancelled");
             }
+
+            Console.Read();
         }
     }
 }
