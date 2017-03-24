@@ -121,7 +121,47 @@ namespace Stenography.Storage
         /// <returns>The data from the speciied file.</returns>
         public unsafe byte[] Read(string path)
         {
-            throw new NotImplementedException();
+            // Load image from file
+            Bitmap image = new Bitmap(path);
+            
+            // Get bitmap data and lock in memory
+            BitmapData bmpData = image.LockBits(
+                new Rectangle(0, 0, image.Width, image.Height),
+                ImageLockMode.ReadWrite,
+                PixelDataFormat
+            );
+
+            // Scan start position
+            byte* scan0 = (byte*)bmpData.Scan0;
+
+            // Number of bytes scanned
+            uint byteCount = 0;
+
+            // For each row
+            for (int i = 0; i < bmpData.Height; i++)
+            {
+                // For each byte in each column (that contains data)
+                for (int j = 0; j < bmpData.Width * BytesPerPixel; j++)
+                {
+                    // Get pointer to current byte
+                    byte* scan = scan0 + i * bmpData.Stride + j * BytesPerChannel;
+
+                    // Check not alpha channel (last channel)
+                    if (byteCount % BytesPerPixel != BytesPerPixel)
+                    {
+                        // Read data
+                    }
+
+                    // Increment byte counter
+                    byteCount++;
+                }
+            }
+
+            // Unlock memory
+            image.UnlockBits(bmpData);
+
+            // Return data
+            return null;
         }
         #endregion
     }
