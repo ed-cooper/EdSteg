@@ -13,7 +13,7 @@ namespace Stenography.Storage
         /// The format pixels should be read in.
         /// </summary>
         /// <remarks>Actual data is stored as BGRA.</remarks>
-        protected const PixelFormat PixelDataFormat = PixelFormat.Format32bppPArgb;
+        protected const PixelFormat PixelDataFormat = PixelFormat.Format32bppArgb;
 
         /// <summary>
         /// The number of bytes used to store a single channel.
