@@ -28,12 +28,36 @@ namespace Stenography.Forms
 
         private void BtnEncrypt_Click(object sender, EventArgs e)
         {
-            new EncryptForm().ShowDialog();
+            if (CheckInputs())
+                new EncryptForm().ShowDialog();
         }
 
         private void BtnDecrypt_Click(object sender, EventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Checks if the inputs enterred are valid and displays any error messages.
+        /// </summary>
+        /// <returns>Whether the inputs were valid.</returns>
+        protected virtual bool CheckInputs()
+        {
+            if (string.IsNullOrEmpty(TxtKey.Text))
+            {
+                // Key not entered
+                MessageBox.Show("Please enter a key");
+                return false;
+            }
+            else if (TxtKey.Text.Length < 8)
+            {
+                // Key not long enough (min 8 characters)
+                MessageBox.Show("Keys must be longer than 8 characters for security");
+                return false;
+            }
+
+            // Validation successful
+            return true;
         }
         #endregion
     }
