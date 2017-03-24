@@ -11,17 +11,29 @@
         /// </returns>
         public static byte[] ToByteArray(this bool[] data)
         {
+            // Cache data length
             int len = data.Length;
+
+            // Get number of bytes needed (len >> 3 is len / 8)
             int bytes = len >> 3;
-            if ((len & 0x07) != 0) ++bytes;
-            byte[] arr2 = new byte[bytes];
+
+            // Check there is a whole number of bytes, if not, add 1 to bytes
+            if ((len & 0x07) != 0)
+                bytes++;
+
+            // Create blank output array
+            byte[] output = new byte[bytes];
+
+            // For each bit
             for (int i = 0; i < data.Length; i++)
             {
+                // Bits default to 0, so only set where the value is 1
                 if (data[i])
-                    arr2[i >> 3] |= (byte)(1 << (i & 0x07));
+                    output[i >> 3] |= (byte)(1 << (i & 0x07));
             }
 
-            return arr2;
+            // Return output
+            return output;
         }
     }
 }
