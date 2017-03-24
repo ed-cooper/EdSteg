@@ -1,5 +1,6 @@
 ﻿using Stenography.Utils;
 using System;
+using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
 
@@ -33,6 +34,9 @@ namespace Stenography.Storage
         /// <param name="data">The data to save.</param>
         public unsafe void Save(string file, string newPath, byte[] data)
         {
+            // Get raw save data
+            BitArray bitData = new BitArray(data);
+
             // Load image from file
             Bitmap image = new Bitmap(file);
 
@@ -49,6 +53,9 @@ namespace Stenography.Storage
             // Number of bytes scanned
             uint byteCount = 0;
 
+            // Data position
+            int dataPos = 0;
+
             // For each row
             for (int i = 0; i < bmpData.Height; i++)
             {
@@ -61,8 +68,14 @@ namespace Stenography.Storage
                     // Check not alpha channel (last channel)
                     if (byteCount % BytesPerPixel != BytesPerPixel)
                     {
-                        // Set LSB to next bit
-                        *scan = (*scan).SetBit(0, false);
+                        // Get value to store
+                        bool value = bitData[dataPos];
+
+                        // Set LSB to value
+                        *scan = (*scan).SetBit(0, value);
+
+                        // Increment data pos
+                        dataPos++;
                     }
 
                     // Increment byte counter
