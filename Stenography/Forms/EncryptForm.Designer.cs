@@ -30,9 +30,9 @@
         {
             this.LblMessage = new System.Windows.Forms.Label();
             this.TxtMessage = new System.Windows.Forms.TextBox();
-            this.LblBase = new System.Windows.Forms.Label();
-            this.BtnBaseBrowse = new System.Windows.Forms.Button();
-            this.LblBasePath = new System.Windows.Forms.Label();
+            this.LblOriginal = new System.Windows.Forms.Label();
+            this.BtnOriginalBrowse = new System.Windows.Forms.Button();
+            this.LblOriginalPath = new System.Windows.Forms.Label();
             this.BtnSaveBrowse = new System.Windows.Forms.Button();
             this.LblSave = new System.Windows.Forms.Label();
             this.LblSavePath = new System.Windows.Forms.Label();
@@ -61,37 +61,37 @@
             this.TxtMessage.Size = new System.Drawing.Size(228, 117);
             this.TxtMessage.TabIndex = 1;
             // 
-            // LblBase
+            // LblOriginal
             // 
-            this.LblBase.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.LblBase.AutoSize = true;
-            this.LblBase.Location = new System.Drawing.Point(12, 140);
-            this.LblBase.Name = "LblBase";
-            this.LblBase.Size = new System.Drawing.Size(50, 13);
-            this.LblBase.TabIndex = 2;
-            this.LblBase.Text = "Base file:";
+            this.LblOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.LblOriginal.AutoSize = true;
+            this.LblOriginal.Location = new System.Drawing.Point(12, 140);
+            this.LblOriginal.Name = "LblOriginal";
+            this.LblOriginal.Size = new System.Drawing.Size(61, 13);
+            this.LblOriginal.TabIndex = 2;
+            this.LblOriginal.Text = "Original file:";
             // 
-            // BtnBaseBrowse
+            // BtnOriginalBrowse
             // 
-            this.BtnBaseBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BtnBaseBrowse.Location = new System.Drawing.Point(98, 135);
-            this.BtnBaseBrowse.Name = "BtnBaseBrowse";
-            this.BtnBaseBrowse.Size = new System.Drawing.Size(55, 23);
-            this.BtnBaseBrowse.TabIndex = 3;
-            this.BtnBaseBrowse.Text = "Browse";
-            this.BtnBaseBrowse.UseVisualStyleBackColor = true;
-            this.BtnBaseBrowse.Click += new System.EventHandler(this.BtnBaseBrowse_Click);
+            this.BtnOriginalBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.BtnOriginalBrowse.Location = new System.Drawing.Point(98, 135);
+            this.BtnOriginalBrowse.Name = "BtnOriginalBrowse";
+            this.BtnOriginalBrowse.Size = new System.Drawing.Size(55, 23);
+            this.BtnOriginalBrowse.TabIndex = 3;
+            this.BtnOriginalBrowse.Text = "Browse";
+            this.BtnOriginalBrowse.UseVisualStyleBackColor = true;
+            this.BtnOriginalBrowse.Click += new System.EventHandler(this.BtnOriginalBrowse_Click);
             // 
-            // LblBasePath
+            // LblOriginalPath
             // 
-            this.LblBasePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.LblOriginalPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblBasePath.AutoSize = true;
-            this.LblBasePath.Location = new System.Drawing.Point(159, 140);
-            this.LblBasePath.Name = "LblBasePath";
-            this.LblBasePath.Size = new System.Drawing.Size(80, 13);
-            this.LblBasePath.TabIndex = 4;
-            this.LblBasePath.Text = "No file selected";
+            this.LblOriginalPath.AutoSize = true;
+            this.LblOriginalPath.Location = new System.Drawing.Point(159, 140);
+            this.LblOriginalPath.Name = "LblOriginalPath";
+            this.LblOriginalPath.Size = new System.Drawing.Size(80, 13);
+            this.LblOriginalPath.TabIndex = 4;
+            this.LblOriginalPath.Text = "No file selected";
             // 
             // BtnSaveBrowse
             // 
@@ -155,9 +155,9 @@
             this.Controls.Add(this.LblSavePath);
             this.Controls.Add(this.LblSave);
             this.Controls.Add(this.BtnSaveBrowse);
-            this.Controls.Add(this.LblBasePath);
-            this.Controls.Add(this.BtnBaseBrowse);
-            this.Controls.Add(this.LblBase);
+            this.Controls.Add(this.LblOriginalPath);
+            this.Controls.Add(this.BtnOriginalBrowse);
+            this.Controls.Add(this.LblOriginal);
             this.Controls.Add(this.TxtMessage);
             this.Controls.Add(this.LblMessage);
             this.MinimumSize = new System.Drawing.Size(354, 296);
@@ -173,9 +173,9 @@
 
         private System.Windows.Forms.Label LblMessage;
         private System.Windows.Forms.TextBox TxtMessage;
-        private System.Windows.Forms.Label LblBase;
-        private System.Windows.Forms.Button BtnBaseBrowse;
-        private System.Windows.Forms.Label LblBasePath;
+        private System.Windows.Forms.Label LblOriginal;
+        private System.Windows.Forms.Button BtnOriginalBrowse;
+        private System.Windows.Forms.Label LblOriginalPath;
         private System.Windows.Forms.Button BtnSaveBrowse;
         private System.Windows.Forms.Label LblSave;
         private System.Windows.Forms.Label LblSavePath;

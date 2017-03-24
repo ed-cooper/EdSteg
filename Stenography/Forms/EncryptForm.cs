@@ -20,13 +20,13 @@ namespace Stenography.Forms
         }
         #endregion
         #region Methods
-        private void BtnBaseBrowse_Click(object sender, EventArgs e)
+        private void BtnOriginalBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                LblBasePath.Text = Path.GetFileName(dialog.FileName);
-                LblBasePath.Tag = dialog.FileName;
+                LblOriginalPath.Text = Path.GetFileName(dialog.FileName);
+                LblOriginalPath.Tag = dialog.FileName;
             }
         }
 
