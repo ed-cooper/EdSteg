@@ -61,9 +61,17 @@ namespace Stenography.Forms
 
         private void BtnGo_Click(object sender, EventArgs e)
         {
+            // Check inputs are valid
             if (CheckInputs())
             {
+                // Get plain text as byte array
+                byte[] plainText = Encoding.Default.GetBytes(TxtMessage.Text);
 
+                // Encrypt text
+                byte[] cipherText = EncryptionProvider.Encrypt(plainText);
+
+                // Store cipher text
+                StorageProvider.Save((string)LblOriginalPath.Tag, (string)LblSavePath.Tag, cipherText);
             }
         }
         
