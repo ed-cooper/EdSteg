@@ -186,9 +186,13 @@ namespace Stenography.Storage
                 // Read bytes straight
                 length = BitConverter.ToInt32(byteData, 0);
             }
-            
+
+            // Get relevant data
+            byte[] data = new byte[length];
+            Array.Copy(byteData, 4, data, 0, length);
+
             // Return data
-            return null;
+            return data;
         }
 
         /// <summary>
