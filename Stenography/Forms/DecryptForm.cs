@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Stenography.Encryption;
+using Stenography.Storage;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +14,27 @@ namespace Stenography.Forms
 {
     public partial class DecryptForm : Form
     {
+        #region Fields
+        /// <summary>
+        /// The <see cref="IEncryptionProvider"/> used for decrypting data. 
+        /// </summary>
+        IEncryptionProvider EncryptionProvider;
+
+        /// <summary>
+        /// The <see cref="IStorageProvider"/> used for reading files. 
+        /// </summary>
+        IStorageProvider StorageProvider;
+        #endregion
         #region Constructor
         public DecryptForm()
         {
             InitializeComponent();
+        }
+
+        public DecryptForm(IEncryptionProvider encryptionProvider, IStorageProvider storageProvider) : this()
+        {
+            EncryptionProvider = encryptionProvider;
+            StorageProvider = storageProvider;
         }
         #endregion
         #region Methods
