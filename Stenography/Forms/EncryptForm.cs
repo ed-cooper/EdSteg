@@ -104,6 +104,13 @@ namespace Stenography.Forms
                 MessageBox.Show("The original file path and save file path must be different");
                 return false;
             }
+            else if (Worker.IsBusy)
+            {
+                // Worker already busy
+                // (This case should be prevented by having BtnGo disabled whilst busy)
+                MessageBox.Show("Please wait for the current action to complete");
+                return false;
+            }
 
             // Validation successful
             return true;
