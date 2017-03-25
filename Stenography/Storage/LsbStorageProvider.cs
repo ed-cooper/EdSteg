@@ -194,7 +194,7 @@ namespace Stenography.Storage
 
             // Get relevant data
             byte[] data = new byte[length];
-            Array.Copy(byteData, 4, data, 0, length);
+            Buffer.BlockCopy(byteData, 4, data, 0, length);
 
             // Return data
             return data;
