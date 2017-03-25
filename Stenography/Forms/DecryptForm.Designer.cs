@@ -50,6 +50,7 @@
             this.BtnBrowse.TabIndex = 5;
             this.BtnBrowse.Text = "Browse";
             this.BtnBrowse.UseVisualStyleBackColor = true;
+            this.BtnBrowse.Click += new System.EventHandler(this.BtnBrowse_Click);
             // 
             // TxtMessage
             // 
