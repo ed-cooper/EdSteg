@@ -61,11 +61,13 @@ namespace Stenography.Forms
             if (CheckInputs())
             {
                 // Create worker arguments
-                Tuple<IEncryptionProvider, IStorageProvider, string> args
-                    = new Tuple<IEncryptionProvider, IStorageProvider, string>(
+                Tuple<IEncryptionProvider, IStorageProvider, string, string, string> args
+                    = new Tuple<IEncryptionProvider, IStorageProvider, string, string, string>(
                         EncryptionProvider, 
                         StorageProvider, 
-                        TxtMessage.Text
+                        TxtMessage.Text,
+                        (string)LblOriginalPath.Tag,
+                        (string)LblSavePath.Tag
                     );
 
                 // Run worker and disable go button
@@ -122,7 +124,10 @@ namespace Stenography.Forms
             //  Item1 = EncryptionProvider
             //  Item2 = StorageProvider
             //  Item3 = TxtMessage.Text
-            Tuple<IEncryptionProvider, IStorageProvider, string> args = (Tuple<IEncryptionProvider, IStorageProvider, string>)e.Argument;
+            //  Item4 = LblOriginalPath.Tag (contains original file path)
+            //  Item5 = LblSavePath.Tag (contains save file path)
+            Tuple<IEncryptionProvider, IStorageProvider, string, string, string> args =
+                (Tuple<IEncryptionProvider, IStorageProvider, string, string, string>)e.Argument;
 
             // Get plain text as byte array
             byte[] plainText = Encoding.Default.GetBytes(args.Item3);
@@ -131,7 +136,7 @@ namespace Stenography.Forms
             byte[] cipherText = args.Item1.Encrypt(plainText);
 
             // Store cipher text
-            args.Item2.Save((string)LblOriginalPath.Tag, (string)LblSavePath.Tag, cipherText);
+            args.Item2.Save(args.Item4, args.Item5, cipherText);
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
