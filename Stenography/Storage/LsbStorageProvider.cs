@@ -35,7 +35,7 @@ namespace Stenography.Storage
         {
             get
             {
-                throw new NotImplementedException();
+                return "Image Files (*.jpg, *.png, *.bmp, *.gif, *.tiff, *.exif)|*.jpg;*.png;*.bmp;*.gif;*.tiff;*.exif|All Files (*.*)|*.*";
             }
         }
 
@@ -46,7 +46,7 @@ namespace Stenography.Storage
         {
             get
             {
-                throw new NotImplementedException();
+                return "PNG Files (*.png)|*.png|All Files (*.*)|*.*";
             }
         }
         #endregion
