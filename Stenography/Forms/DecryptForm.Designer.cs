@@ -68,6 +68,11 @@
             this.TxtMessage.Size = new System.Drawing.Size(342, 188);
             this.TxtMessage.TabIndex = 7;
             // 
+            // Worker
+            // 
+            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
+            this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted);
+            // 
             // DecryptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);

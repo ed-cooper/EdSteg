@@ -1,6 +1,7 @@
 ﻿using Stenography.Encryption;
 using Stenography.Storage;
 using System;
+using System.ComponentModel;
 using System.Text;
 using System.Windows.Forms;
 
@@ -37,15 +38,46 @@ namespace Stenography.Forms
             OpenFileDialog dialog = new OpenFileDialog();
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                // Read cipher text from file
-                byte[] cipherText = StorageProvider.Read(dialog.FileName);
+                // Create worker arguments
+                Tuple<IEncryptionProvider, IStorageProvider, string> args =
+                    new Tuple<IEncryptionProvider, IStorageProvider, string>(
+                        EncryptionProvider,
+                        StorageProvider,
+                        dialog.FileName
+                    );
 
-                // Decrypt back to plain text
-                byte[] plainText = EncryptionProvider.Decrypt(cipherText);
-
-                // Display message
-                TxtMessage.Text = Encoding.Default.GetString(plainText);
+                // Run worker and disable button
+                BtnBrowse.Enabled = false;
+                Worker.RunWorkerAsync(args);
             }
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Get arguments
+            //  Item1 = EncryptionProvider
+            //  Item2 = StorageProvider
+            //  Item3 = dialog.FileName
+            Tuple<IEncryptionProvider, IStorageProvider, string> args =
+                (Tuple< IEncryptionProvider, IStorageProvider, string>)e.Argument;
+
+            // Read cipher text from file
+            byte[] cipherText = args.Item2.Read(args.Item3);
+
+            // Decrypt back to plain text
+            byte[] plainText = args.Item1.Decrypt(cipherText);
+
+            // Return string message
+            e.Result = Encoding.Default.GetString(plainText);
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // Re-enable browse button
+            BtnBrowse.Enabled = true;
+
+            // Display decrypted message
+            TxtMessage.Text = (string)e.Result;
         }
         #endregion
     }
