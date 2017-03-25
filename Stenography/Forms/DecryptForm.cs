@@ -36,6 +36,7 @@ namespace Stenography.Forms
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = StorageProvider.SaveFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 // Create worker arguments
