@@ -1,6 +1,7 @@
 ﻿using Stenography.Encryption;
 using Stenography.Storage;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
@@ -59,17 +60,17 @@ namespace Stenography.Forms
             // Check inputs are valid
             if (CheckInputs())
             {
-                // Get plain text as byte array
-                byte[] plainText = Encoding.Default.GetBytes(TxtMessage.Text);
+                // Create worker arguments
+                Tuple<IEncryptionProvider, IStorageProvider, string> args
+                    = new Tuple<IEncryptionProvider, IStorageProvider, string>(
+                        EncryptionProvider, 
+                        StorageProvider, 
+                        TxtMessage.Text
+                    );
 
-                // Encrypt text
-                byte[] cipherText = EncryptionProvider.Encrypt(plainText);
-
-                // Store cipher text
-                StorageProvider.Save((string)LblOriginalPath.Tag, (string)LblSavePath.Tag, cipherText);
-
-                // Select file in file explorer
-                Process.Start("explorer.exe", $"/select, \"{LblSavePath.Tag}\"");
+                // Run worker and disable go button
+                BtnGo.Enabled = false;
+                Worker.RunWorkerAsync(args);
             }
         }
         
@@ -106,6 +107,33 @@ namespace Stenography.Forms
 
             // Validation successful
             return true;
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            // Get arguments
+            //  Item1 = EncryptionProvider
+            //  Item2 = StorageProvider
+            //  Item3 = TxtMessage.Text
+            Tuple<IEncryptionProvider, IStorageProvider, string> args = (Tuple<IEncryptionProvider, IStorageProvider, string>)e.Argument;
+
+            // Get plain text as byte array
+            byte[] plainText = Encoding.Default.GetBytes(args.Item3);
+
+            // Encrypt text
+            byte[] cipherText = args.Item1.Encrypt(plainText);
+
+            // Store cipher text
+            args.Item2.Save((string)LblOriginalPath.Tag, (string)LblSavePath.Tag, cipherText);
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            // Re-enable go button
+            BtnGo.Enabled = true;
+
+            // Open file explorer at saved file
+            Process.Start("explorer.exe", $"/select, \"{LblSavePath.Tag}\"");
         }
         #endregion
     }

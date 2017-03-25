@@ -148,6 +148,11 @@
             this.PnlAction.Size = new System.Drawing.Size(338, 52);
             this.PnlAction.TabIndex = 9;
             // 
+            // Worker
+            // 
+            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
+            this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted);
+            // 
             // EncryptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
