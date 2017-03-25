@@ -7,7 +7,7 @@ using System.Drawing.Imaging;
 
 namespace Stenography.Storage
 {
-    public class BitmapStorageProvider : IStorageProvider
+    public class LsbStorageProvider : IStorageProvider
     {
         #region Constants
         /// <summary>

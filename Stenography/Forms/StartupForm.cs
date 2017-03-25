@@ -89,7 +89,7 @@ namespace Stenography.Forms
             switch (CmbStorage.SelectedIndex)
             {
                 case 0: // LSB (default)
-                    return new BitmapStorageProvider();
+                    return new LsbStorageProvider();
                 default:
                     throw new ArgumentException("Unknown selected index for CmbStorage");
             }
