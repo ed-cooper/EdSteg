@@ -95,7 +95,7 @@ namespace Stenography.Forms
             }
 
             // Return string message
-            e.Result = Encoding.Default.GetString(plainText);
+            e.Result = Encoding.UTF8.GetString(plainText);
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)

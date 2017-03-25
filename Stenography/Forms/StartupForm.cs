@@ -63,7 +63,7 @@ namespace Stenography.Forms
         /// <returns>The selected <see cref="IEncryptionProvider"/> object.</returns>
         protected virtual IEncryptionProvider GetEncrpytionProvider()
         {
-            byte[] key = Encoding.Default.GetBytes(TxtKey.Text);
+            byte[] key = Encoding.UTF8.GetBytes(TxtKey.Text);
 
             switch (CmbEncryption.SelectedIndex)
             {

@@ -134,7 +134,7 @@ namespace Stenography.Forms
             string savePath = args.Item5;
             
             // Get plain text as byte array
-            byte[] plainText = Encoding.Default.GetBytes(message);
+            byte[] plainText = Encoding.UTF8.GetBytes(message);
 
             // Encrypt text
             byte[] cipherText;
