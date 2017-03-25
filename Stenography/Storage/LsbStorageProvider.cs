@@ -220,6 +220,10 @@ namespace Stenography.Storage
                 length = BitConverter.ToInt32(byteData, 0);
             }
 
+            // Check length is valid
+            if (length + 4 > byteData.Length)
+                throw new InvalidOperationException("Steg data is corrupt");
+
             // Get relevant data
             byte[] data = new byte[length];
             Buffer.BlockCopy(byteData, 4, data, 0, length);
