@@ -55,17 +55,18 @@ namespace Stenography.Forms
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Get arguments
-            //  Item1 = EncryptionProvider
-            //  Item2 = StorageProvider
-            //  Item3 = dialog.FileName
             Tuple<IEncryptionProvider, IStorageProvider, string> args =
                 (Tuple< IEncryptionProvider, IStorageProvider, string>)e.Argument;
 
+            IEncryptionProvider encryptionProvider = args.Item1;
+            IStorageProvider storageProvider = args.Item2;
+            string file = args.Item3;
+
             // Read cipher text from file
-            byte[] cipherText = args.Item2.Read(args.Item3);
+            byte[] cipherText = storageProvider.Read(file);
 
             // Decrypt back to plain text
-            byte[] plainText = args.Item1.Decrypt(cipherText);
+            byte[] plainText = encryptionProvider.Decrypt(cipherText);
 
             // Return string message
             e.Result = Encoding.Default.GetString(plainText);
