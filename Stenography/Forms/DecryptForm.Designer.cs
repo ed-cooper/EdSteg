@@ -36,6 +36,8 @@
             // 
             // LblFilePath
             // 
+            this.LblFilePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.LblFilePath.AutoEllipsis = true;
             this.LblFilePath.Location = new System.Drawing.Point(73, 17);
             this.LblFilePath.Name = "LblFilePath";
