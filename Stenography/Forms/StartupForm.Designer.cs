@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StartupForm));
             this.LblKey = new System.Windows.Forms.Label();
             this.TxtKey = new System.Windows.Forms.TextBox();
             this.LblEncryption = new System.Windows.Forms.Label();
@@ -121,7 +122,7 @@
             this.BtnDecrypt.UseVisualStyleBackColor = true;
             this.BtnDecrypt.Click += new System.EventHandler(this.BtnDecrypt_Click);
             // 
-            // FormMain
+            // StartupForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -134,8 +135,9 @@
             this.Controls.Add(this.LblEncryption);
             this.Controls.Add(this.TxtKey);
             this.Controls.Add(this.LblKey);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(300, 168);
-            this.Name = "FormMain";
+            this.Name = "StartupForm";
             this.Text = "Ed Steg";
             this.Load += new System.EventHandler(this.FormMain_Load);
             this.ResumeLayout(false);

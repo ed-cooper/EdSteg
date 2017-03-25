@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EncryptForm));
             this.LblMessage = new System.Windows.Forms.Label();
             this.TxtMessage = new System.Windows.Forms.TextBox();
             this.LblOriginal = new System.Windows.Forms.Label();
@@ -160,6 +161,7 @@
             this.Controls.Add(this.LblOriginal);
             this.Controls.Add(this.TxtMessage);
             this.Controls.Add(this.LblMessage);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(354, 296);
             this.Name = "EncryptForm";
             this.Text = "Encrypt";

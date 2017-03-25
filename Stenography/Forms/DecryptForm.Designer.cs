@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DecryptForm));
             this.LblFilePath = new System.Windows.Forms.Label();
             this.BtnBrowse = new System.Windows.Forms.Button();
             this.TxtMessage = new System.Windows.Forms.TextBox();
@@ -72,6 +73,7 @@
             this.Controls.Add(this.TxtMessage);
             this.Controls.Add(this.LblFilePath);
             this.Controls.Add(this.BtnBrowse);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(382, 280);
             this.Name = "DecryptForm";
             this.Text = "Decrypt";
