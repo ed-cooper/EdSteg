@@ -83,7 +83,7 @@ namespace Stenography.Storage
             Bitmap image = new Bitmap(file);
 
             // Check image is big enough to store all data
-            if (image.Width * image.Height < allData.Length)
+            if (image.Width * image.Height < bitData.Length)
                 throw new ArgumentException("Data to large to store in image");
 
             // Get bitmap data and lock in memory
