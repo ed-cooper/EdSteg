@@ -121,22 +121,23 @@ namespace Stenography.Forms
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Get arguments
-            //  Item1 = EncryptionProvider
-            //  Item2 = StorageProvider
-            //  Item3 = TxtMessage.Text
-            //  Item4 = LblOriginalPath.Tag (contains original file path)
-            //  Item5 = LblSavePath.Tag (contains save file path)
             Tuple<IEncryptionProvider, IStorageProvider, string, string, string> args =
                 (Tuple<IEncryptionProvider, IStorageProvider, string, string, string>)e.Argument;
 
+            IEncryptionProvider encryptionProvider = args.Item1;
+            IStorageProvider storageProvider = args.Item2;
+            string message = args.Item3;
+            string originalPath = args.Item4;
+            string savePath = args.Item5;
+
             // Get plain text as byte array
-            byte[] plainText = Encoding.Default.GetBytes(args.Item3);
+            byte[] plainText = Encoding.Default.GetBytes(message);
 
             // Encrypt text
-            byte[] cipherText = args.Item1.Encrypt(plainText);
+            byte[] cipherText = encryptionProvider.Encrypt(plainText);
 
             // Store cipher text
-            args.Item2.Save(args.Item4, args.Item5, cipherText);
+            storageProvider.Save(originalPath, savePath, cipherText);
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
