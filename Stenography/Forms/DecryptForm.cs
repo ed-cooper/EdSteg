@@ -40,7 +40,18 @@ namespace Stenography.Forms
         #region Methods
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                // Read cipher text from file
+                byte[] cipherText = StorageProvider.Read(dialog.FileName);
 
+                // Decrypt back to plain text
+                byte[] plainText = EncryptionProvider.Decrypt(cipherText);
+
+                // Display message
+                TxtMessage.Text = Encoding.Default.GetString(plainText);
+            }
         }
         #endregion
     }
