@@ -33,6 +33,7 @@
             this.BtnBrowse = new System.Windows.Forms.Button();
             this.TxtMessage = new System.Windows.Forms.TextBox();
             this.Worker = new System.ComponentModel.BackgroundWorker();
+            this.Progress = new System.Windows.Forms.ProgressBar();
             this.SuspendLayout();
             // 
             // LblFilePath
@@ -65,7 +66,7 @@
             this.TxtMessage.Multiline = true;
             this.TxtMessage.Name = "TxtMessage";
             this.TxtMessage.ReadOnly = true;
-            this.TxtMessage.Size = new System.Drawing.Size(342, 188);
+            this.TxtMessage.Size = new System.Drawing.Size(342, 166);
             this.TxtMessage.TabIndex = 7;
             // 
             // Worker
@@ -73,11 +74,22 @@
             this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
             this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted);
             // 
+            // Progress
+            // 
+            this.Progress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Progress.Location = new System.Drawing.Point(12, 213);
+            this.Progress.MarqueeAnimationSpeed = 50;
+            this.Progress.Name = "Progress";
+            this.Progress.Size = new System.Drawing.Size(342, 16);
+            this.Progress.TabIndex = 11;
+            // 
             // DecryptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(366, 241);
+            this.Controls.Add(this.Progress);
             this.Controls.Add(this.TxtMessage);
             this.Controls.Add(this.LblFilePath);
             this.Controls.Add(this.BtnBrowse);
@@ -96,5 +108,6 @@
         private System.Windows.Forms.Button BtnBrowse;
         private System.Windows.Forms.TextBox TxtMessage;
         private System.ComponentModel.BackgroundWorker Worker;
+        private System.Windows.Forms.ProgressBar Progress;
     }
 }

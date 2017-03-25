@@ -51,8 +51,9 @@ namespace Stenography.Forms
                         dialog.FileName
                     );
 
-                // Run worker and disable button
+                // Run worker, disable button and start progress bar
                 BtnBrowse.Enabled = false;
+                Progress.Style = ProgressBarStyle.Marquee;
                 Worker.RunWorkerAsync(args);
             }
         }
@@ -79,8 +80,9 @@ namespace Stenography.Forms
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // Re-enable browse button
+            // Re-enable browse button and stop progress bar
             BtnBrowse.Enabled = true;
+            Progress.Style = ProgressBarStyle.Blocks;
 
             // Display decrypted message
             TxtMessage.Text = (string)e.Result;
