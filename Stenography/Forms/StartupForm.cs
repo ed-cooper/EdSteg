@@ -36,7 +36,8 @@ namespace Stenography.Forms
 
         private void BtnDecrypt_Click(object sender, EventArgs e)
         {
-
+            if (CheckInputs())
+                new DecryptForm(GetEncrpytionProvider(), GetStorageProvder()).ShowDialog();
         }
 
         /// <summary>
