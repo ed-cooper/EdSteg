@@ -69,10 +69,30 @@ namespace Stenography.Forms
             string file = args.Item3;
 
             // Read cipher text from file
-            byte[] cipherText = storageProvider.Read(file);
+            byte[] cipherText;
+            try
+            {
+                cipherText = storageProvider.Read(file);
+            }
+            catch (Exception ex)
+            {
+                // Exception occured whilst reading file, so wrap
+                // exception nicely for display output
+                throw new Exception($"An {ex.GetType().Name} occured whilst reading the file:\r\n{ex.Message}", ex);
+            }
 
             // Decrypt back to plain text
-            byte[] plainText = encryptionProvider.Decrypt(cipherText);
+            byte[] plainText;
+            try
+            {
+                plainText = encryptionProvider.Decrypt(cipherText);
+            }
+            catch(Exception ex)
+            {
+                // Exception occured whilst decrypting text, so wrap
+                // exception nicely for display output
+                throw new Exception($"An {ex.GetType().Name} occured whilst decrypting the text:\r\n{ex.Message}", ex);
+            }
 
             // Return string message
             e.Result = Encoding.Default.GetString(plainText);
@@ -84,9 +104,18 @@ namespace Stenography.Forms
             BtnBrowse.Enabled = true;
             Progress.Style = ProgressBarStyle.Blocks;
 
-            // Display decrypted message
-            TxtMessage.Text = (string)e.Result;
-            TxtMessage.Enabled = true;
+            // Check an exception didn't occur
+            if (e.Error == null)
+            {
+                // Display decrypted message
+                TxtMessage.Text = (string)e.Result;
+                TxtMessage.Enabled = true;
+            }
+            else
+            {
+                // Display error message
+                MessageBox.Show(e.Error.Message);
+            }
         }
         #endregion
     }
