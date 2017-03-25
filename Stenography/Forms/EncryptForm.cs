@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
@@ -72,6 +73,9 @@ namespace Stenography.Forms
 
                 // Store cipher text
                 StorageProvider.Save((string)LblOriginalPath.Tag, (string)LblSavePath.Tag, cipherText);
+
+                // Select file in file explorer
+                Process.Start("explorer.exe", $"/select, \"{LblSavePath.Tag}\"");
             }
         }
         
