@@ -147,8 +147,12 @@ namespace Stenography.Forms
             // Re-enable go button
             BtnGo.Enabled = true;
 
-            // Open file explorer at saved file
-            Process.Start("explorer.exe", $"/select, \"{LblSavePath.Tag}\"");
+            // Ask user if they want to view the file
+            if (MessageBox.Show("Task completed. Do you want to view the file in File Explorer?", "Ed Steg", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                // Open file explorer at saved file
+                Process.Start("explorer.exe", $"/select, \"{LblSavePath.Tag}\"");
+            }
         }
         #endregion
     }
