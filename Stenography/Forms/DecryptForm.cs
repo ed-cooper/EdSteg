@@ -86,6 +86,7 @@ namespace Stenography.Forms
 
             // Display decrypted message
             TxtMessage.Text = (string)e.Result;
+            TxtMessage.Enabled = true;
         }
         #endregion
     }
