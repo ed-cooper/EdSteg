@@ -2,6 +2,7 @@
 using Stenography.Storage;
 using System;
 using System.ComponentModel;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
 
@@ -39,6 +40,9 @@ namespace Stenography.Forms
             dialog.Filter = StorageProvider.SaveFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                // Set file name label
+                LblFilePath.Text = Path.GetFileName(dialog.FileName);
+
                 // Create worker arguments
                 Tuple<IEncryptionProvider, IStorageProvider, string> args =
                     new Tuple<IEncryptionProvider, IStorageProvider, string>(
