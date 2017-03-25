@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace Stenography.Storage
+﻿namespace Stenography.Storage
 {
     public interface IStorageProvider
     {
