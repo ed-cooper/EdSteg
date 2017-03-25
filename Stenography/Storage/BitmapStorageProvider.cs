@@ -35,6 +35,11 @@ namespace Stenography.Storage
         /// <param name="data">The data to save.</param>
         public unsafe void Save(string file, string newPath, byte[] data)
         {
+            // Check original file path and save file path are not the same
+            // (Otherwise ExternalException will occur on image.Save)
+            if (file == newPath)
+                throw new ArgumentException("Original file path cannot be same as save file path");
+
             // Create file header (stores data length)
             byte[] header = BitConverter.GetBytes(data.Length);
 
