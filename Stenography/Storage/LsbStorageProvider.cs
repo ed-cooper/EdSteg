@@ -117,7 +117,7 @@ namespace Stenography.Storage
             image.UnlockBits(bmpData);
 
             // Save bitmap
-            image.Save(newPath);
+            image.Save(newPath, ImageFormat.Png);
         }
 
         /// <summary>
