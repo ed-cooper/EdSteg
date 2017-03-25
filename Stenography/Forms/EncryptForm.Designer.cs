@@ -88,10 +88,10 @@
             // 
             this.LblOriginalPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblOriginalPath.AutoSize = true;
+            this.LblOriginalPath.AutoEllipsis = true;
             this.LblOriginalPath.Location = new System.Drawing.Point(159, 140);
             this.LblOriginalPath.Name = "LblOriginalPath";
-            this.LblOriginalPath.Size = new System.Drawing.Size(80, 13);
+            this.LblOriginalPath.Size = new System.Drawing.Size(167, 13);
             this.LblOriginalPath.TabIndex = 4;
             this.LblOriginalPath.Text = "No file selected";
             // 
@@ -120,10 +120,10 @@
             // 
             this.LblSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.LblSavePath.AutoSize = true;
+            this.LblSavePath.AutoEllipsis = true;
             this.LblSavePath.Location = new System.Drawing.Point(159, 169);
             this.LblSavePath.Name = "LblSavePath";
-            this.LblSavePath.Size = new System.Drawing.Size(80, 13);
+            this.LblSavePath.Size = new System.Drawing.Size(167, 13);
             this.LblSavePath.TabIndex = 7;
             this.LblSavePath.Text = "No file selected";
             // 
