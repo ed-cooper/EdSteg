@@ -103,6 +103,12 @@ namespace Stenography.Forms
                 MessageBox.Show("Please select a path to save the new file to");
                 return false;
             }
+            else if (string.Equals((string)LblOriginalPath.Tag, (string)LblSavePath.Tag, StringComparison.CurrentCultureIgnoreCase))
+            {
+                // Original file path and save file path are the same
+                MessageBox.Show("The original file path and save file path must be different");
+                return false;
+            }
 
             // Validation successful
             return true;
