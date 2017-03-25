@@ -26,6 +26,30 @@ namespace Stenography.Storage
         /// </summary>
         protected const byte BytesPerPixel = 4;
         #endregion
+        #region Properties
+
+        /// <summary>
+        /// Gets the filter to be used for <see cref="OpenFileDialog"/> windows.
+        /// </summary>
+        public string OpenFileDialogFilter
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        /// <summary>
+        /// Gets the filter to be used for <see cref="SaveFileDialog"/> windows.
+        /// </summary>
+        public string SaveFileDialogFilter
+        {
+            get
+            {
+                throw new NotImplementedException();
+            }
+        }
+        #endregion
         #region Methods
         /// <summary>
         /// Saves the specified data to the specified file.
