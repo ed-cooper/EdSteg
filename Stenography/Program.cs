@@ -1,8 +1,5 @@
-﻿using Stenography.Encryption;
-using System;
+﻿using System;
 using System.Windows.Forms;
-using System.Text;
-using Stenography.Storage;
 using Stenography.Forms;
 
 namespace Stenography
