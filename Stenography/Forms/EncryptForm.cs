@@ -72,7 +72,8 @@ namespace Stenography.Forms
                         (string)LblSavePath.Tag
                     );
 
-                // Run worker and disable go button
+                // Run worker, disable go button and show progress bar
+                Progress.Show();
                 BtnGo.Enabled = false;
                 Worker.RunWorkerAsync(args);
             }
@@ -144,8 +145,9 @@ namespace Stenography.Forms
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
-            // Re-enable go button
+            // Re-enable go button and hide progress bar
             BtnGo.Enabled = true;
+            Progress.Hide();
 
             // Ask user if they want to view the file
             if (MessageBox.Show("Task completed. Do you want to view the file in File Explorer?", "Ed Steg", MessageBoxButtons.YesNo) == DialogResult.Yes)

@@ -40,6 +40,7 @@
             this.BtnGo = new System.Windows.Forms.Button();
             this.PnlAction = new System.Windows.Forms.Panel();
             this.Worker = new System.ComponentModel.BackgroundWorker();
+            this.Progress = new System.Windows.Forms.ProgressBar();
             this.PnlAction.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -141,6 +142,7 @@
             // PnlAction
             // 
             this.PnlAction.BackColor = System.Drawing.SystemColors.ControlLightLight;
+            this.PnlAction.Controls.Add(this.Progress);
             this.PnlAction.Controls.Add(this.BtnGo);
             this.PnlAction.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.PnlAction.Location = new System.Drawing.Point(0, 205);
@@ -152,6 +154,18 @@
             // 
             this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
             this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted);
+            // 
+            // Progress
+            // 
+            this.Progress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.Progress.Location = new System.Drawing.Point(15, 13);
+            this.Progress.MarqueeAnimationSpeed = 50;
+            this.Progress.Name = "Progress";
+            this.Progress.Size = new System.Drawing.Size(250, 23);
+            this.Progress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
+            this.Progress.TabIndex = 10;
+            this.Progress.Visible = false;
             // 
             // EncryptForm
             // 
@@ -190,5 +204,6 @@
         private System.Windows.Forms.Button BtnGo;
         private System.Windows.Forms.Panel PnlAction;
         private System.ComponentModel.BackgroundWorker Worker;
+        private System.Windows.Forms.ProgressBar Progress;
     }
 }
