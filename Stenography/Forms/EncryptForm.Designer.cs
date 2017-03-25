@@ -39,6 +39,7 @@
             this.LblSavePath = new System.Windows.Forms.Label();
             this.BtnGo = new System.Windows.Forms.Button();
             this.PnlAction = new System.Windows.Forms.Panel();
+            this.Worker = new System.ComponentModel.BackgroundWorker();
             this.PnlAction.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -183,5 +184,6 @@
         private System.Windows.Forms.Label LblSavePath;
         private System.Windows.Forms.Button BtnGo;
         private System.Windows.Forms.Panel PnlAction;
+        private System.ComponentModel.BackgroundWorker Worker;
     }
 }
