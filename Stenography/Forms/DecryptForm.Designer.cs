@@ -32,6 +32,7 @@
             this.LblFilePath = new System.Windows.Forms.Label();
             this.BtnBrowse = new System.Windows.Forms.Button();
             this.TxtMessage = new System.Windows.Forms.TextBox();
+            this.Worker = new System.ComponentModel.BackgroundWorker();
             this.SuspendLayout();
             // 
             // LblFilePath
@@ -89,5 +90,6 @@
         private System.Windows.Forms.Label LblFilePath;
         private System.Windows.Forms.Button BtnBrowse;
         private System.Windows.Forms.TextBox TxtMessage;
+        private System.ComponentModel.BackgroundWorker Worker;
     }
 }
