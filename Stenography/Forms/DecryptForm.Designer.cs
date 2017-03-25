@@ -36,10 +36,10 @@
             // 
             // LblFilePath
             // 
-            this.LblFilePath.AutoSize = true;
+            this.LblFilePath.AutoEllipsis = true;
             this.LblFilePath.Location = new System.Drawing.Point(73, 17);
             this.LblFilePath.Name = "LblFilePath";
-            this.LblFilePath.Size = new System.Drawing.Size(80, 13);
+            this.LblFilePath.Size = new System.Drawing.Size(281, 13);
             this.LblFilePath.TabIndex = 6;
             this.LblFilePath.Text = "No file selected";
             // 
