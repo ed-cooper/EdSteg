@@ -132,15 +132,34 @@ namespace Stenography.Forms
             string message = args.Item3;
             string originalPath = args.Item4;
             string savePath = args.Item5;
-
+            
             // Get plain text as byte array
             byte[] plainText = Encoding.Default.GetBytes(message);
 
             // Encrypt text
-            byte[] cipherText = encryptionProvider.Encrypt(plainText);
+            byte[] cipherText;
+            try
+            {
+                cipherText = encryptionProvider.Encrypt(plainText);
+            }
+            catch (Exception ex)
+            {
+                // Exception occured whilst encrypting text, so wrap
+                // exception nicely for display output
+                throw new Exception($"An {ex.GetType().Name} occured whilst encrypting the text:\r\n{ex.Message}", ex);
+            }
 
             // Store cipher text
-            storageProvider.Save(originalPath, savePath, cipherText);
+            try
+            {
+                storageProvider.Save(originalPath, savePath, cipherText);
+            }
+            catch (Exception ex)
+            {
+                // Exception occured whilst storing file, so wrap
+                // exception nicely for display output
+                throw new Exception($"An {ex.GetType().Name} occured whilst storing the file:\r\n{ex.Message}", ex);
+            }
         }
 
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -148,12 +167,21 @@ namespace Stenography.Forms
             // Re-enable go button and hide progress bar
             BtnGo.Enabled = true;
             Progress.Hide();
-
-            // Ask user if they want to view the file
-            if (MessageBox.Show("Task completed. Do you want to view the file in File Explorer?", "Ed Steg", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            
+            // Check there wasn't an error
+            if (e.Error == null)
             {
-                // Open file explorer at saved file
-                Process.Start("explorer.exe", $"/select, \"{LblSavePath.Tag}\"");
+                // Ask user if they want to view the file
+                if (MessageBox.Show("Task completed. Do you want to view the file in File Explorer?", "Ed Steg", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    // Open file explorer at saved file
+                    Process.Start("explorer.exe", $"/select, \"{LblSavePath.Tag}\"");
+                }
+            }
+            else
+            {
+                // Display error message
+                MessageBox.Show(e.Error.Message);
             }
         }
         #endregion
