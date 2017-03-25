@@ -37,7 +37,7 @@ namespace Stenography.Forms
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = StorageProvider.SaveFileDialogFilter;
+            dialog.Filter = StorageProvider.ExportFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 // Set file name label

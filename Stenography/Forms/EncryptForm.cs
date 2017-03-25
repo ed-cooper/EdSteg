@@ -38,7 +38,7 @@ namespace Stenography.Forms
         private void BtnOriginalBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = StorageProvider.OpenFileDialogFilter;
+            dialog.Filter = StorageProvider.ImportFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 LblOriginalPath.Text = Path.GetFileName(dialog.FileName);
@@ -49,7 +49,7 @@ namespace Stenography.Forms
         private void BtnSaveBrowse_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = StorageProvider.SaveFileDialogFilter;
+            dialog.Filter = StorageProvider.ExportFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 LblSavePath.Text = Path.GetFileName(dialog.FileName);

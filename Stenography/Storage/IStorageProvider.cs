@@ -6,14 +6,14 @@ namespace Stenography.Storage
     {
         #region Properties
         /// <summary>
-        /// Gets the filter to be used for <see cref="OpenFileDialog"/> windows.
+        /// Gets the dialog file filter to be used for browsing files to import.
         /// </summary>
-        string OpenFileDialogFilter { get; }
+        string ImportFileDialogFilter { get; }
 
         /// <summary>
-        /// Gets the filter to be used for <see cref="SaveFileDialog"/> windows.
+        /// Gets the dialog file filter to be used for browsing exported files.
         /// </summary>
-        string SaveFileDialogFilter { get; }
+        string ExportFileDialogFilter { get; }
         #endregion
         #region Methods
         /// <summary>
