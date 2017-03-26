@@ -8,6 +8,9 @@ using System.Windows.Forms;
 
 namespace Stenography.Forms
 {
+    /// <summary>
+    /// Allows the user to read and decrypt messages.
+    /// </summary>
     public partial class DecryptForm : Form
     {
         #region Fields

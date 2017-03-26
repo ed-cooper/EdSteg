@@ -9,6 +9,9 @@ using System.Windows.Forms;
 
 namespace Stenography.Forms
 {
+    /// <summary>
+    /// Allows the user to save and encrpyt messages.
+    /// </summary>
     public partial class EncryptForm : Form
     {
         #region Fields

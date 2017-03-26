@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace Stenography.Forms
 {
+    /// <summary>
+    /// Allows the user to set up the values used during the stenography process.
+    /// </summary>
     public partial class StartupForm : Form
     {
         #region Constructor
