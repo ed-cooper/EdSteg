@@ -40,15 +40,21 @@ namespace Stenography.Forms
             dialog.Filter = StorageProvider.ExportFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
+                // Get file path
+                string filePath = dialog.FileName;
+
+                // Free memory
+                dialog.Dispose();
+
                 // Set file name label
-                LblFilePath.Text = Path.GetFileName(dialog.FileName);
+                LblFilePath.Text = Path.GetFileName(filePath);
 
                 // Create worker arguments
                 Tuple<IEncryptionProvider, IStorageProvider, string> args =
                     new Tuple<IEncryptionProvider, IStorageProvider, string>(
                         EncryptionProvider,
                         StorageProvider,
-                        dialog.FileName
+                        filePath
                     );
 
                 // Run worker, disable button and start progress bar
