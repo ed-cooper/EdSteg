@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace Stenography.Encryption
 {
+    /// <summary>
+    /// Provides encryption using the XOR cipher algorithm.
+    /// </summary>
     public class XCrypt : IEncryptionProvider
     {
         #region Properties

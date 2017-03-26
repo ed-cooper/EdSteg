@@ -1,5 +1,8 @@
 ﻿namespace Stenography.Encryption
 {
+    /// <summary>
+    /// Provides encrpytion and decryption utilities for a specific cipher.
+    /// </summary>
     public interface IEncryptionProvider
     {
         #region Properties
