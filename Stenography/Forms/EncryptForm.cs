@@ -61,6 +61,7 @@ namespace Stenography.Forms
                     // File is valid
                     LblOriginalPath.Text = Path.GetFileName(dialog.FileName);
                     LblOriginalPath.Tag = dialog.FileName;
+                    TxtMessage.MaxLength = storagePotential;
                     StoragePotential = storagePotential;
                     UpdateStorageLabel();
                 }
