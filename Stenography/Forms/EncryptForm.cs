@@ -3,6 +3,7 @@ using Stenography.Storage;
 using System;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
@@ -221,10 +222,20 @@ namespace Stenography.Forms
             {
                 // Byte limit is known
                 LblStorage.Text = $"{byteCount} / {StoragePotential} bytes";
+                if (byteCount + 20 > StoragePotential)
+                {
+                    // Close to / exceded byte limit so make label red
+                    LblStorage.ForeColor = Color.Red;
+                }
+                else
+                {
+                    LblStorage.ForeColor = Color.Gray;
+                }
             }
             else
             {
                 // Byte limit unknown
+                LblStorage.ForeColor = Color.Gray;
                 string byteDisplay = "byte" + (byteCount != 1 ? "s" : "");
                 LblStorage.Text = $"{byteCount} {byteDisplay}";
             }

@@ -175,7 +175,7 @@
             this.LblStorage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LblStorage.AutoEllipsis = true;
-            this.LblStorage.ForeColor = System.Drawing.Color.Red;
+            this.LblStorage.ForeColor = System.Drawing.Color.Gray;
             this.LblStorage.Location = new System.Drawing.Point(98, 117);
             this.LblStorage.Name = "LblStorage";
             this.LblStorage.Size = new System.Drawing.Size(228, 13);
