@@ -168,8 +168,8 @@ namespace Stenography.Storage
                 PixelDataFormat
             );
 
-            // Store raw data from image
-            List<bool> rawData = new List<bool>();
+            // Store steg data from image
+            byte[] byteData = new byte[(bmpData.Width * bmpData.Width / 8) * (BytesPerPixel - 1) * BytesPerChannel];
 
             // Scan start position
             byte* scan0 = (byte*)bmpData.Scan0;
@@ -177,6 +177,9 @@ namespace Stenography.Storage
             // Number of bytes scanned
             uint byteCount = 0;
 
+            // Number of bits stores
+            int bitCount = 0;
+            
             // For each row
             for (int i = 0; i < bmpData.Height; i++)
             {
@@ -190,7 +193,11 @@ namespace Stenography.Storage
                     if (byteCount % BytesPerPixel != BytesPerPixel - 1)
                     {
                         // Store current bit
-                        rawData.Add((*scan).GetBit(0));
+                        if ((*scan).GetBit(0))
+                            byteData[bitCount / 8] |= (byte)(1 << bitCount % 8);
+
+                        // Increment bit count
+                        bitCount++;
                     }
 
                     // Increment byte counter
@@ -203,13 +210,7 @@ namespace Stenography.Storage
             image.Dispose();
 
             // Process data
-
-            // Convert bool data to byte array
-            byte[] byteData = rawData.ToArray().ToByteArray();
-
-            // Free memory
-            rawData = null;
-
+            
             int length;
             if (BitConverter.IsLittleEndian)
             {
