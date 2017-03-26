@@ -88,33 +88,6 @@ namespace Stenography.Encryption
                 throw new InvalidOperationException("Invalid key");
             }
         }
-
-        protected static void CustomParallelExtractedMax(double[] array, double factor)
-        {
-            int degreeOfParallelism = Environment.ProcessorCount;
-
-            Task[] tasks = new Task[degreeOfParallelism];
-
-            for (int taskNumber = 0; taskNumber < degreeOfParallelism; taskNumber++)
-            {
-                // capturing taskNumber in lambda wouldn't work correctly
-                int taskNumberCopy = taskNumber;
-
-                tasks[taskNumber] = Task.Factory.StartNew(
-                    () =>
-                    {
-                        int max = array.Length * (taskNumberCopy + 1) / degreeOfParallelism;
-                        for (int i = array.Length * taskNumberCopy / degreeOfParallelism;
-                            i < max;
-                            i++)
-                        {
-                            array[i] = array[i] * factor;
-                        }
-                    });
-            }
-
-            Task.WaitAll(tasks);
-        }
         #endregion
     }
 }
