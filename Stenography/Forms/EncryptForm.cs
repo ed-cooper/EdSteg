@@ -43,6 +43,11 @@ namespace Stenography.Forms
         }
         #endregion
         #region Methods
+        private void TxtMessage_TextChanged(object sender, EventArgs e)
+        {
+            UpdateStorageLabel();
+        }
+
         private void BtnOriginalBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
@@ -56,6 +61,7 @@ namespace Stenography.Forms
                     LblOriginalPath.Text = Path.GetFileName(dialog.FileName);
                     LblOriginalPath.Tag = dialog.FileName;
                     StoragePotential = storagePotential;
+                    UpdateStorageLabel();
                 }
                 else
                 {
@@ -201,6 +207,20 @@ namespace Stenography.Forms
             {
                 // Display error message
                 MessageBox.Show(e.Error.Message);
+            }
+        }
+
+        protected virtual void UpdateStorageLabel()
+        {
+            int byteCount = Encoding.UTF8.GetByteCount(TxtMessage.Text);
+            if (LblOriginalPath.Tag != null)
+            {
+                LblStorage.Text = $"{byteCount} / {StoragePotential} bytes";
+            }
+            else
+            {
+                string byteDisplay = "byte" + (byteCount != 1 ? "s" : "");
+                LblStorage.Text = $"{byteCount} {byteDisplay}";
             }
         }
         #endregion

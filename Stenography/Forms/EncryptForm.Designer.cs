@@ -65,6 +65,7 @@
             this.TxtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TxtMessage.Size = new System.Drawing.Size(228, 102);
             this.TxtMessage.TabIndex = 1;
+            this.TxtMessage.TextChanged += new System.EventHandler(this.TxtMessage_TextChanged);
             // 
             // LblOriginal
             // 
