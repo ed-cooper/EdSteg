@@ -41,6 +41,7 @@
             this.PnlAction = new System.Windows.Forms.Panel();
             this.Progress = new System.Windows.Forms.ProgressBar();
             this.Worker = new System.ComponentModel.BackgroundWorker();
+            this.LblStorage = new System.Windows.Forms.Label();
             this.PnlAction.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -62,14 +63,14 @@
             this.TxtMessage.Multiline = true;
             this.TxtMessage.Name = "TxtMessage";
             this.TxtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TxtMessage.Size = new System.Drawing.Size(228, 117);
+            this.TxtMessage.Size = new System.Drawing.Size(228, 102);
             this.TxtMessage.TabIndex = 1;
             // 
             // LblOriginal
             // 
             this.LblOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LblOriginal.AutoSize = true;
-            this.LblOriginal.Location = new System.Drawing.Point(12, 140);
+            this.LblOriginal.Location = new System.Drawing.Point(12, 146);
             this.LblOriginal.Name = "LblOriginal";
             this.LblOriginal.Size = new System.Drawing.Size(61, 13);
             this.LblOriginal.TabIndex = 2;
@@ -78,7 +79,7 @@
             // BtnOriginalBrowse
             // 
             this.BtnOriginalBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BtnOriginalBrowse.Location = new System.Drawing.Point(98, 135);
+            this.BtnOriginalBrowse.Location = new System.Drawing.Point(98, 141);
             this.BtnOriginalBrowse.Name = "BtnOriginalBrowse";
             this.BtnOriginalBrowse.Size = new System.Drawing.Size(55, 23);
             this.BtnOriginalBrowse.TabIndex = 3;
@@ -91,7 +92,7 @@
             this.LblOriginalPath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LblOriginalPath.AutoEllipsis = true;
-            this.LblOriginalPath.Location = new System.Drawing.Point(159, 140);
+            this.LblOriginalPath.Location = new System.Drawing.Point(159, 146);
             this.LblOriginalPath.Name = "LblOriginalPath";
             this.LblOriginalPath.Size = new System.Drawing.Size(167, 13);
             this.LblOriginalPath.TabIndex = 4;
@@ -100,7 +101,7 @@
             // BtnSaveBrowse
             // 
             this.BtnSaveBrowse.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.BtnSaveBrowse.Location = new System.Drawing.Point(98, 164);
+            this.BtnSaveBrowse.Location = new System.Drawing.Point(98, 170);
             this.BtnSaveBrowse.Name = "BtnSaveBrowse";
             this.BtnSaveBrowse.Size = new System.Drawing.Size(55, 23);
             this.BtnSaveBrowse.TabIndex = 5;
@@ -112,7 +113,7 @@
             // 
             this.LblSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.LblSave.AutoSize = true;
-            this.LblSave.Location = new System.Drawing.Point(12, 169);
+            this.LblSave.Location = new System.Drawing.Point(12, 175);
             this.LblSave.Name = "LblSave";
             this.LblSave.Size = new System.Drawing.Size(59, 13);
             this.LblSave.TabIndex = 6;
@@ -123,7 +124,7 @@
             this.LblSavePath.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.LblSavePath.AutoEllipsis = true;
-            this.LblSavePath.Location = new System.Drawing.Point(159, 169);
+            this.LblSavePath.Location = new System.Drawing.Point(159, 175);
             this.LblSavePath.Name = "LblSavePath";
             this.LblSavePath.Size = new System.Drawing.Size(167, 13);
             this.LblSavePath.TabIndex = 7;
@@ -146,7 +147,7 @@
             this.PnlAction.Controls.Add(this.Progress);
             this.PnlAction.Controls.Add(this.BtnGo);
             this.PnlAction.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.PnlAction.Location = new System.Drawing.Point(0, 205);
+            this.PnlAction.Location = new System.Drawing.Point(0, 211);
             this.PnlAction.Name = "PnlAction";
             this.PnlAction.Size = new System.Drawing.Size(338, 52);
             this.PnlAction.TabIndex = 9;
@@ -168,11 +169,24 @@
             this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
             this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted);
             // 
+            // LblStorage
+            // 
+            this.LblStorage.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.LblStorage.AutoEllipsis = true;
+            this.LblStorage.ForeColor = System.Drawing.Color.Red;
+            this.LblStorage.Location = new System.Drawing.Point(98, 117);
+            this.LblStorage.Name = "LblStorage";
+            this.LblStorage.Size = new System.Drawing.Size(228, 13);
+            this.LblStorage.TabIndex = 10;
+            this.LblStorage.Text = "0 bytes";
+            // 
             // EncryptForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(338, 257);
+            this.ClientSize = new System.Drawing.Size(338, 263);
+            this.Controls.Add(this.LblStorage);
             this.Controls.Add(this.PnlAction);
             this.Controls.Add(this.LblSavePath);
             this.Controls.Add(this.LblSave);
@@ -206,5 +220,6 @@
         private System.Windows.Forms.Panel PnlAction;
         private System.ComponentModel.BackgroundWorker Worker;
         private System.Windows.Forms.ProgressBar Progress;
+        private System.Windows.Forms.Label LblStorage;
     }
 }
