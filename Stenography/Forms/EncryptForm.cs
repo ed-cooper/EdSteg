@@ -152,6 +152,10 @@ namespace Stenography.Forms
             return true;
         }
 
+        /// <summary>
+        /// Main encryption and storage work.
+        /// </summary>
+        /// <remarks>Use worker to keep UI thread responsive.</remarks>
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Get arguments
@@ -193,6 +197,9 @@ namespace Stenography.Forms
             }
         }
 
+        /// <summary>
+        /// Occurs when the action is complete (or failed).
+        /// </summary>
         private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
             // Re-enable go button and hide progress bar
