@@ -250,7 +250,17 @@ namespace Stenography.Storage
         /// <remarks>Returns 0 for invalid files.</remarks>
         public int GetStoragePotential(string file)
         {
-            return 0;
+            Bitmap image;
+            try
+            {
+                image = new Bitmap(file);
+            }
+            catch
+            {
+                return 0;
+            }
+
+            return (image.Width * image.Height / 8) - 4;
         }
         #endregion
     }
