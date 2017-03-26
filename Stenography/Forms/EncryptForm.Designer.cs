@@ -39,8 +39,8 @@
             this.LblSavePath = new System.Windows.Forms.Label();
             this.BtnGo = new System.Windows.Forms.Button();
             this.PnlAction = new System.Windows.Forms.Panel();
-            this.Worker = new System.ComponentModel.BackgroundWorker();
             this.Progress = new System.Windows.Forms.ProgressBar();
+            this.Worker = new System.ComponentModel.BackgroundWorker();
             this.PnlAction.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -61,6 +61,7 @@
             this.TxtMessage.Location = new System.Drawing.Point(98, 12);
             this.TxtMessage.Multiline = true;
             this.TxtMessage.Name = "TxtMessage";
+            this.TxtMessage.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.TxtMessage.Size = new System.Drawing.Size(228, 117);
             this.TxtMessage.TabIndex = 1;
             // 
@@ -150,11 +151,6 @@
             this.PnlAction.Size = new System.Drawing.Size(338, 52);
             this.PnlAction.TabIndex = 9;
             // 
-            // Worker
-            // 
-            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
-            this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted);
-            // 
             // Progress
             // 
             this.Progress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
@@ -166,6 +162,11 @@
             this.Progress.Style = System.Windows.Forms.ProgressBarStyle.Marquee;
             this.Progress.TabIndex = 10;
             this.Progress.Visible = false;
+            // 
+            // Worker
+            // 
+            this.Worker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.Worker_DoWork);
+            this.Worker.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.Worker_RunWorkerCompleted);
             // 
             // EncryptForm
             // 
