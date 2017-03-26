@@ -260,7 +260,7 @@ namespace Stenography.Storage
                 return 0;
             }
 
-            return (image.Width * image.Height / 8) - 4;
+            return (image.Width * image.Height * (BytesPerPixel - BytesPerChannel) / 8) - 4;
         }
         #endregion
     }
