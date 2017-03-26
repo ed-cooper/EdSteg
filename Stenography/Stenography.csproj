@@ -79,7 +79,6 @@
     <Compile Include="Storage\LsbStorageProvider.cs" />
     <Compile Include="Storage\IStorageProvider.cs" />
     <Compile Include="Utils\BinaryUtils.cs" />
-    <Compile Include="Utils\Converters.cs" />
     <EmbeddedResource Include="Forms\DecryptForm.resx">
       <DependentUpon>DecryptForm.cs</DependentUpon>
     </EmbeddedResource>
