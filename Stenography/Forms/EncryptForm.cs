@@ -55,12 +55,16 @@ namespace Stenography.Forms
             dialog.Filter = StorageProvider.ImportFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                int storagePotential = StorageProvider.GetStoragePotential(dialog.FileName);
+                // Store file path and free memory
+                string filePath = dialog.FileName;
+                dialog.Dispose();
+
+                int storagePotential = StorageProvider.GetStoragePotential(filePath);
                 if (storagePotential != 0)
                 {
                     // File is valid
-                    LblOriginalPath.Text = Path.GetFileName(dialog.FileName);
-                    LblOriginalPath.Tag = dialog.FileName;
+                    LblOriginalPath.Text = Path.GetFileName(filePath);
+                    LblOriginalPath.Tag = filePath;
                     TxtMessage.MaxLength = storagePotential;
                     StoragePotential = storagePotential;
                     UpdateStorageLabel();
