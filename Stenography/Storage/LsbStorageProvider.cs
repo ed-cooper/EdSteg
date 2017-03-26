@@ -27,6 +27,11 @@ namespace Stenography.Storage
         /// The number of bytes used to store a single pixel.
         /// </summary>
         protected const byte BytesPerPixel = 4;
+
+        /// <summary>
+        /// The number of bits that can be stored per pixel.
+        /// </summary>
+        protected const byte BitStoragePerPixel = BytesPerPixel - BytesPerChannel;
         #endregion
         #region Properties
 
@@ -85,7 +90,7 @@ namespace Stenography.Storage
             Bitmap image = new Bitmap(file);
 
             // Check image is big enough to store all data
-            if (image.Width * image.Height * (BytesPerPixel - BytesPerChannel) < bitData.Length)
+            if (image.Width * image.Height * BitStoragePerPixel < bitData.Length)
                 throw new ArgumentException("Data too large to store in image");
 
             // Get bitmap data and lock in memory
@@ -260,7 +265,7 @@ namespace Stenography.Storage
                 return 0;
             }
 
-            return (image.Width * image.Height * (BytesPerPixel - BytesPerChannel) / 8) - 4;
+            return (image.Width * image.Height * BitStoragePerPixel / 8) - 4;
         }
         #endregion
     }
