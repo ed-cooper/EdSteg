@@ -1,5 +1,8 @@
 ﻿namespace Stenography.Storage
 {
+    /// <summary>
+    /// Provides storage of encrpyted data using a specific stenography system.
+    /// </summary>
     public interface IStorageProvider
     {
         #region Properties

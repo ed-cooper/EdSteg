@@ -6,6 +6,9 @@ using System.Drawing.Imaging;
 
 namespace Stenography.Storage
 {
+    /// <summary>
+    /// Provides storage by saving data in the least significant bit of pixel channels.
+    /// </summary>
     public class LsbStorageProvider : IStorageProvider
     {
         #region Constants
