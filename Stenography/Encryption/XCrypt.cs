@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace Stenography.Encryption
 {
@@ -46,23 +47,73 @@ namespace Stenography.Encryption
         /// </summary>
         /// <param name="data">The data to crypt.</param>
         /// <returns>The crypted data.</returns>
+        /// <remarks>Use parallelism for efficiency.</remarks>
         protected virtual byte[] Crypt(byte[] data)
         {
             if (Key != null && Key.Length > 0)
             {
                 byte[] cipher = new byte[data.Length];
+                
+                // Make each processor carry out a portion of the work
+                int degreeOfParallelism = Environment.ProcessorCount;
+                Task[] tasks = new Task[degreeOfParallelism];
 
-                for (int i = 0; i < data.Length; i++)
+                // For each task
+                for (int currentTask = 0; currentTask < degreeOfParallelism; currentTask++)
                 {
-                    cipher[i] = (byte)(data[i] ^ Key[i % Key.Length]);
+                    // Prevents access issues of taskNumber from the lamba
+                    int currentTaskCopy = currentTask;
+
+                    tasks[currentTask] = Task.Factory.StartNew(() => {
+                        // Cacha upper limit
+                        int max = data.Length * (currentTaskCopy + 1) / degreeOfParallelism;
+
+                        // Do work portion
+                        for (int i = data.Length * currentTaskCopy / degreeOfParallelism; i < max; i++)
+                        {
+                            // Use XOR with key
+                            cipher[i] = (byte)(data[i] ^ Key[i % Key.Length]);
+                        }
+                    });
                 }
 
+                // Wait for all tasks to complete
+                Task.WaitAll(tasks);
+
+                // Return output
                 return cipher;
             }
             else
             {
                 throw new InvalidOperationException("Invalid key");
             }
+        }
+
+        protected static void CustomParallelExtractedMax(double[] array, double factor)
+        {
+            int degreeOfParallelism = Environment.ProcessorCount;
+
+            Task[] tasks = new Task[degreeOfParallelism];
+
+            for (int taskNumber = 0; taskNumber < degreeOfParallelism; taskNumber++)
+            {
+                // capturing taskNumber in lambda wouldn't work correctly
+                int taskNumberCopy = taskNumber;
+
+                tasks[taskNumber] = Task.Factory.StartNew(
+                    () =>
+                    {
+                        int max = array.Length * (taskNumberCopy + 1) / degreeOfParallelism;
+                        for (int i = array.Length * taskNumberCopy / degreeOfParallelism;
+                            i < max;
+                            i++)
+                        {
+                            array[i] = array[i] * factor;
+                        }
+                    });
+            }
+
+            Task.WaitAll(tasks);
         }
         #endregion
     }
