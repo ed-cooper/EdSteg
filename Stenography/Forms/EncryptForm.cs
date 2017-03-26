@@ -210,15 +210,21 @@ namespace Stenography.Forms
             }
         }
 
+        /// <summary>
+        /// Updates <see cref="LblStorage"/>. 
+        /// </summary>
         protected virtual void UpdateStorageLabel()
         {
+            // Get number of bytes in textbox (using UTF8 encoding)
             int byteCount = Encoding.UTF8.GetByteCount(TxtMessage.Text);
             if (LblOriginalPath.Tag != null)
             {
+                // Byte limit is known
                 LblStorage.Text = $"{byteCount} / {StoragePotential} bytes";
             }
             else
             {
+                // Byte limit unknown
                 string byteDisplay = "byte" + (byteCount != 1 ? "s" : "");
                 LblStorage.Text = $"{byteCount} {byteDisplay}";
             }
