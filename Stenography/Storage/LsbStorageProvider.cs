@@ -206,7 +206,9 @@ namespace Stenography.Storage
 
             // Convert bool data to byte array
             byte[] byteData = rawData.ToArray().ToByteArray();
-            rawData.Clear();
+
+            // Free memory
+            rawData = null;
 
             int length;
             if (BitConverter.IsLittleEndian)
