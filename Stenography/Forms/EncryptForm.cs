@@ -24,6 +24,11 @@ namespace Stenography.Forms
         /// The <see cref="IStorageProvider"/> used for saving files. 
         /// </summary>
         IStorageProvider StorageProvider;
+
+        /// <summary>
+        /// The maximum potential storage in bytes of the current file.
+        /// </summary>
+        int StoragePotential;
         #endregion
         #region Constructor
         public EncryptForm()
@@ -44,8 +49,19 @@ namespace Stenography.Forms
             dialog.Filter = StorageProvider.ImportFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
-                LblOriginalPath.Text = Path.GetFileName(dialog.FileName);
-                LblOriginalPath.Tag = dialog.FileName;
+                int storagePotential = StorageProvider.GetStoragePotential(dialog.FileName);
+                if (storagePotential != 0)
+                {
+                    // File is valid
+                    LblOriginalPath.Text = Path.GetFileName(dialog.FileName);
+                    LblOriginalPath.Tag = dialog.FileName;
+                    StoragePotential = storagePotential;
+                }
+                else
+                {
+                    // Invalid file
+                    MessageBox.Show("Invalid file format");
+                }
             }
         }
 
