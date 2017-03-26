@@ -241,6 +241,17 @@ namespace Stenography.Storage
             // Return data
             return data;
         }
+
+        /// <summary>
+        /// Returns the max number of bytes that could be encoded within the specified file.
+        /// </summary>
+        /// <param name="file">The file to test.</param>
+        /// <returns>The max number of bytes that could be encoded within the specified file.</returns>
+        /// <remarks>Returns 0 for invalid files.</remarks>
+        public int GetStoragePotential(string file)
+        {
+            return 0;
+        }
         #endregion
     }
 }

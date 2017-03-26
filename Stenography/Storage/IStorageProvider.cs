@@ -31,6 +31,14 @@
         /// <param name="path">The file to read the data from.</param>
         /// <returns>The data from the speciied file.</returns>
         byte[] Read(string path);
+
+        /// <summary>
+        /// Returns the max number of bytes that could be encoded within the specified file.
+        /// </summary>
+        /// <param name="file">The file to test.</param>
+        /// <returns>The max number of bytes that could be encoded within the specified file.</returns>
+        /// <remarks>Returns 0 for invalid files.</remarks>
+        int GetStoragePotential(string file);
         #endregion
     }
 }
