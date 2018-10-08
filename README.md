@@ -6,10 +6,10 @@ This is an old project of mine that was chosen to practice the use of unsafe cod
 ## Screenshots
 
 ### Startup Form
-![Startup Form](https://i.postimg.cc/Dyx41C8X/Screenshot_1.png)
+![Startup Form](Screenshots/Screenshot%201.png)
 
 ### Encrypt Form
-![Encrypt Form](https://i.postimg.cc/tCdQcfhs/Screenshot_2.png)
+![Encrypt Form](Screenshots/Screenshot%202.png)
 
 ### Decrypt Form
-![Decrypt Form](https://i.postimg.cc/z3YLGMBL/Screenshot_3.png)
+![Decrypt Form](Screenshots/Screenshot%203.png)
