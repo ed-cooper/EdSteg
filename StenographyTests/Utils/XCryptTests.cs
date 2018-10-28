@@ -24,5 +24,23 @@ namespace Stenography.Utils.Tests
 
             Assert.AreEqual(BinaryUtils.SetBit(original, 2, false), expected);
         }
+
+        [Test]
+        public void GetBitTest_High()
+        {
+            const byte value = 0b00001000;
+            const bool expected = true;
+
+            Assert.AreEqual(BinaryUtils.GetBit(value, 3), expected);
+        }
+
+        [Test]
+        public void GetBitTest_Low()
+        {
+            const byte value = 0b11101111;
+            const bool expected = false;
+
+            Assert.AreEqual(BinaryUtils.GetBit(value, 4), expected);
+        }
     }
 }
