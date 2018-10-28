@@ -32,6 +32,17 @@ namespace Stenography.Encryption.Tests
         }
 
         [TestMethod()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void EncryptTest_EmptyKey()
+        {
+            byte[] key = new byte[0];
+            XCrypt crypt = new XCrypt(key);
+            byte[] plainText = Encoding.UTF8.GetBytes("sample");
+
+            crypt.Encrypt(plainText);
+        }
+
+        [TestMethod()]
         public void DecryptTest()
         {
             byte[] key = Encoding.UTF8.GetBytes("12345");
@@ -40,6 +51,17 @@ namespace Stenography.Encryption.Tests
             byte[] plainText = Encoding.UTF8.GetBytes("sample");
 
             CollectionAssert.AreEqual(crypt.Decrypt(cipherText), plainText);
+        }
+
+        [TestMethod()]
+        [ExpectedException(typeof(InvalidOperationException))]
+        public void DecryptTest_EmptyKey()
+        {
+            byte[] key = new byte[0];
+            XCrypt crypt = new XCrypt(key);
+            byte[] cipherText = Encoding.UTF8.GetBytes("BS^DYT");
+
+            crypt.Decrypt(cipherText);
         }
     }
 }
