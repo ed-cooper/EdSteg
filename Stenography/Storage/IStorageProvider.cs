@@ -6,6 +6,7 @@
     public interface IStorageProvider
     {
         #region Properties
+
         /// <summary>
         /// Gets the dialog file filter to be used for browsing files to import.
         /// </summary>
@@ -15,8 +16,11 @@
         /// Gets the dialog file filter to be used for browsing exported files.
         /// </summary>
         string ExportFileDialogFilter { get; }
+
         #endregion
+
         #region Methods
+
         /// <summary>
         /// Saves the specified data to the specified file.
         /// </summary>
@@ -39,6 +43,7 @@
         /// <returns>The max number of bytes that could be encoded within the specified file.</returns>
         /// <remarks>Returns 0 for invalid files.</remarks>
         int GetStoragePotential(string file);
+
         #endregion
     }
 }

@@ -1,12 +1,12 @@
-﻿using Stenography.Encryption;
-using Stenography.Storage;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using Stenography.Encryption;
+using Stenography.Storage;
 
 namespace Stenography.Forms
 {
@@ -16,22 +16,26 @@ namespace Stenography.Forms
     public partial class EncryptForm : Form
     {
         #region Fields
-        /// <summary>
-        /// The <see cref="IEncryptionProvider"/> used for encrypting data. 
-        /// </summary>
-        IEncryptionProvider EncryptionProvider;
 
         /// <summary>
-        /// The <see cref="IStorageProvider"/> used for saving files. 
+        /// The <see cref="IEncryptionProvider" /> used for encrypting data.
         /// </summary>
-        IStorageProvider StorageProvider;
+        private readonly IEncryptionProvider _encryptionProvider;
+
+        /// <summary>
+        /// The <see cref="IStorageProvider" /> used for saving files.
+        /// </summary>
+        private readonly IStorageProvider _storageProvider;
 
         /// <summary>
         /// The maximum potential storage in bytes of the current file.
         /// </summary>
-        int StoragePotential;
+        private int _storagePotential;
+
         #endregion
+
         #region Constructor
+
         public EncryptForm()
         {
             InitializeComponent();
@@ -39,11 +43,14 @@ namespace Stenography.Forms
 
         public EncryptForm(IEncryptionProvider encryptionProvider, IStorageProvider storageProvider) : this()
         {
-            EncryptionProvider = encryptionProvider;
-            StorageProvider = storageProvider;
+            _encryptionProvider = encryptionProvider;
+            _storageProvider = storageProvider;
         }
+
         #endregion
+
         #region Methods
+
         private void TxtMessage_TextChanged(object sender, EventArgs e)
         {
             UpdateStorageLabel();
@@ -52,21 +59,21 @@ namespace Stenography.Forms
         private void BtnOriginalBrowse_Click(object sender, EventArgs e)
         {
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = StorageProvider.ImportFileDialogFilter;
+            dialog.Filter = _storageProvider.ImportFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 // Store file path and free memory
                 string filePath = dialog.FileName;
                 dialog.Dispose();
 
-                int storagePotential = StorageProvider.GetStoragePotential(filePath);
+                int storagePotential = _storageProvider.GetStoragePotential(filePath);
                 if (storagePotential != 0)
                 {
                     // File is valid
                     LblOriginalPath.Text = Path.GetFileName(filePath);
                     LblOriginalPath.Tag = filePath;
                     TxtMessage.MaxLength = storagePotential;
-                    StoragePotential = storagePotential;
+                    _storagePotential = storagePotential;
                     UpdateStorageLabel();
                 }
                 else
@@ -80,7 +87,7 @@ namespace Stenography.Forms
         private void BtnSaveBrowse_Click(object sender, EventArgs e)
         {
             SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = StorageProvider.ExportFileDialogFilter;
+            dialog.Filter = _storageProvider.ExportFileDialogFilter;
             if (dialog.ShowDialog() == DialogResult.OK)
             {
                 LblSavePath.Text = Path.GetFileName(dialog.FileName);
@@ -91,25 +98,22 @@ namespace Stenography.Forms
         private void BtnGo_Click(object sender, EventArgs e)
         {
             // Check inputs are valid
-            if (CheckInputs())
-            {
-                // Create worker arguments
-                Tuple<IEncryptionProvider, IStorageProvider, string, string, string> args
-                    = new Tuple<IEncryptionProvider, IStorageProvider, string, string, string>(
-                        EncryptionProvider, 
-                        StorageProvider, 
-                        TxtMessage.Text,
-                        (string)LblOriginalPath.Tag,
-                        (string)LblSavePath.Tag
-                    );
+            if (!CheckInputs()) return;
 
-                // Run worker, disable go button and show progress bar
-                Progress.Show();
-                BtnGo.Enabled = false;
-                Worker.RunWorkerAsync(args);
-            }
+            // Create worker arguments
+            Tuple<IEncryptionProvider, IStorageProvider, string, string, string> args
+                = new Tuple<IEncryptionProvider, IStorageProvider, string, string, string>(_encryptionProvider,
+                                                                                           _storageProvider,
+                                                                                           TxtMessage.Text,
+                                                                                           (string)LblOriginalPath.Tag,
+                                                                                           (string)LblSavePath.Tag);
+
+            // Run worker, disable go button and show progress bar
+            Progress.Show();
+            BtnGo.Enabled = false;
+            Worker.RunWorkerAsync(args);
         }
-        
+
         /// <summary>
         /// Checks if the inputs submitted are valid and displays any error messages.
         /// </summary>
@@ -122,25 +126,31 @@ namespace Stenography.Forms
                 MessageBox.Show("Please enter a message to show");
                 return false;
             }
-            else if (string.IsNullOrEmpty((string)LblOriginalPath.Tag))
+
+            if (string.IsNullOrEmpty((string)LblOriginalPath.Tag))
             {
                 // No original file
                 MessageBox.Show("Please select the original file to hide the data inside");
                 return false;
             }
-            else if (string.IsNullOrEmpty((string)LblSavePath.Tag))
+
+            if (string.IsNullOrEmpty((string)LblSavePath.Tag))
             {
                 // No save file
                 MessageBox.Show("Please select a path to save the new file to");
                 return false;
             }
-            else if (string.Equals((string)LblOriginalPath.Tag, (string)LblSavePath.Tag, StringComparison.CurrentCultureIgnoreCase))
+
+            if (string.Equals((string)LblOriginalPath.Tag,
+                              (string)LblSavePath.Tag,
+                              StringComparison.CurrentCultureIgnoreCase))
             {
                 // Original file path and save file path are the same
                 MessageBox.Show("The original file path and save file path must be different");
                 return false;
             }
-            else if (Worker.IsBusy)
+
+            if (Worker.IsBusy)
             {
                 // Worker already busy
                 // (This case should be prevented by having BtnGo disabled whilst busy)
@@ -167,7 +177,7 @@ namespace Stenography.Forms
             string message = args.Item3;
             string originalPath = args.Item4;
             string savePath = args.Item5;
-            
+
             // Get plain text as byte array
             byte[] plainText = Encoding.UTF8.GetBytes(message);
 
@@ -205,14 +215,15 @@ namespace Stenography.Forms
             // Re-enable go button and hide progress bar
             BtnGo.Enabled = true;
             Progress.Hide();
-            
+
             // Check there wasn't an error
             if (e.Error == null)
             {
                 // Ask user if they want to view the file
-                if (MessageBox.Show("Task completed. Do you want to view the file in File Explorer?", "Ed Steg", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (MessageBox.Show("Task completed. Do you want to view the file in File Explorer?",
+                                    "Ed Steg",
+                                    MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    // Open file explorer at saved file
                     Process.Start("explorer.exe", $"/select, \"{LblSavePath.Tag}\"");
                 }
             }
@@ -224,7 +235,7 @@ namespace Stenography.Forms
         }
 
         /// <summary>
-        /// Updates <see cref="LblStorage"/>. 
+        /// Updates <see cref="LblStorage" />.
         /// </summary>
         protected virtual void UpdateStorageLabel()
         {
@@ -233,16 +244,8 @@ namespace Stenography.Forms
             if (LblOriginalPath.Tag != null)
             {
                 // Byte limit is known
-                LblStorage.Text = $"{byteCount} / {StoragePotential} bytes";
-                if (byteCount + 20 > StoragePotential)
-                {
-                    // Close to / exceded byte limit so make label red
-                    LblStorage.ForeColor = Color.Red;
-                }
-                else
-                {
-                    LblStorage.ForeColor = Color.Gray;
-                }
+                LblStorage.Text = $"{byteCount} / {_storagePotential} bytes";
+                LblStorage.ForeColor = byteCount + 20 > _storagePotential ? Color.Red : Color.Gray;
             }
             else
             {
@@ -252,6 +255,7 @@ namespace Stenography.Forms
                 LblStorage.Text = $"{byteCount} {byteDisplay}";
             }
         }
+
         #endregion
     }
 }

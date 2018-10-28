@@ -6,12 +6,16 @@
     public interface IEncryptionProvider
     {
         #region Properties
+
         /// <summary>
         /// Gets or sets the key used for encryption.
         /// </summary>
         byte[] Key { get; set; }
+
         #endregion
+
         #region Functions
+
         /// <summary>
         /// Encrypts the specified plain text.
         /// </summary>
@@ -25,6 +29,7 @@
         /// <param name="cipherText">The cipher text to decrypt.</param>
         /// <returns>The original plain text.</returns>
         byte[] Decrypt(byte[] cipherText);
+
         #endregion
     }
 }

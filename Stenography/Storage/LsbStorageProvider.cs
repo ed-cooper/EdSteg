@@ -1,8 +1,8 @@
-﻿using Stenography.Utils;
-using System;
+﻿using System;
 using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
+using Stenography.Utils;
 
 namespace Stenography.Storage
 {
@@ -12,6 +12,7 @@ namespace Stenography.Storage
     public class LsbStorageProvider : IStorageProvider
     {
         #region Constants
+
         /// <summary>
         /// The format pixels should be read in.
         /// </summary>
@@ -32,32 +33,27 @@ namespace Stenography.Storage
         /// The number of bits that can be stored per pixel.
         /// </summary>
         protected const byte BitStoragePerPixel = BytesPerPixel - BytesPerChannel;
+
         #endregion
+
         #region Properties
 
         /// <summary>
         /// Gets the dialog file filter to be used for browsing files to import.
         /// </summary>
-        public string ImportFileDialogFilter
-        {
-            get
-            {
-                return "Image Files (*.jpg, *.png, *.bmp, *.gif, *.tiff, *.exif)|*.jpg;*.png;*.bmp;*.gif;*.tiff;*.exif|All Files (*.*)|*.*";
-            }
-        }
+        public string ImportFileDialogFilter { get; } =
+            "Image Files (*.jpg, *.png, *.bmp, *.gif, *.tiff, *.exif)|*.jpg;*.png;*.bmp;*.gif;*.tiff;*.exif|All Files (*.*)|*.*";
 
         /// <summary>
         /// Gets the dialog file filter to be used for browsing exported files.
         /// </summary>
-        public string ExportFileDialogFilter
-        {
-            get
-            {
-                return "PNG Files (*.png)|*.png|All Files (*.*)|*.*";
-            }
-        }
+        public string ExportFileDialogFilter { get; } =
+            "PNG Files (*.png)|*.png|All Files (*.*)|*.*";
+
         #endregion
+
         #region Methods
+
         /// <summary>
         /// Saves the specified data to the specified file.
         /// </summary>
@@ -94,11 +90,9 @@ namespace Stenography.Storage
                 throw new ArgumentException("Data too large to store in image");
 
             // Get bitmap data and lock in memory
-            BitmapData bmpData = image.LockBits(
-                new Rectangle(0, 0, image.Width, image.Height),
-                ImageLockMode.ReadWrite,
-                PixelDataFormat
-            );
+            BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
+                                                ImageLockMode.ReadWrite,
+                                                PixelDataFormat);
 
             // Create random number generator
             Random rand = new Random();
@@ -167,16 +161,14 @@ namespace Stenography.Storage
         {
             // Load image from file
             Bitmap image = new Bitmap(path);
-            
+
             // Get bitmap data and lock in memory
-            BitmapData bmpData = image.LockBits(
-                new Rectangle(0, 0, image.Width, image.Height),
-                ImageLockMode.ReadWrite,
-                PixelDataFormat
-            );
+            BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
+                                                ImageLockMode.ReadWrite,
+                                                PixelDataFormat);
 
             // Store steg data from image
-            byte[] byteData = new byte[(bmpData.Width * bmpData.Width / 8) * (BytesPerPixel - 1) * BytesPerChannel];
+            byte[] byteData = new byte[bmpData.Width * bmpData.Width / 8 * (BytesPerPixel - 1) * BytesPerChannel];
 
             // Scan start position
             byte* scan0 = (byte*)bmpData.Scan0;
@@ -186,7 +178,7 @@ namespace Stenography.Storage
 
             // Number of bits stores
             int bitCount = 0;
-            
+
             // For each row
             for (int i = 0; i < bmpData.Height; i++)
             {
@@ -201,7 +193,7 @@ namespace Stenography.Storage
                     {
                         // Store current bit
                         if ((*scan).GetBit(0))
-                            byteData[bitCount / 8] |= (byte)(1 << bitCount % 8);
+                            byteData[bitCount / 8] |= (byte)(1 << (bitCount % 8));
 
                         // Increment bit count
                         bitCount++;
@@ -217,23 +209,19 @@ namespace Stenography.Storage
             image.Dispose();
 
             // Process data
-            
+
             int length;
             if (BitConverter.IsLittleEndian)
-            {
-                // Reverse order of bytes for little endian systems
-                length = BitConverter.ToInt32(new byte[4] {
-                    byteData[3],
-                    byteData[2],
-                    byteData[1],
-                    byteData[0]
-                }, 0);
-            }
+                length = BitConverter.ToInt32(new[]
+                                              {
+                                                  byteData[3],
+                                                  byteData[2],
+                                                  byteData[1],
+                                                  byteData[0]
+                                              },
+                                              0);
             else
-            {
-                // Read bytes straight
                 length = BitConverter.ToInt32(byteData, 0);
-            }
 
             // Check length is valid
             if (length + 4 > byteData.Length)
@@ -242,7 +230,7 @@ namespace Stenography.Storage
             // Get relevant data
             byte[] data = new byte[length];
             Buffer.BlockCopy(byteData, 4, data, 0, length);
-            
+
             // Return data
             return data;
         }
@@ -265,8 +253,9 @@ namespace Stenography.Storage
                 return 0;
             }
 
-            return (image.Width * image.Height * BitStoragePerPixel / 8) - 4;
+            return image.Width * image.Height * BitStoragePerPixel / 8 - 4;
         }
+
         #endregion
     }
 }

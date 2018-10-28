@@ -1,10 +1,10 @@
-﻿using Stenography.Encryption;
-using Stenography.Storage;
-using System;
+﻿using System;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using Stenography.Encryption;
+using Stenography.Storage;
 
 namespace Stenography.Forms
 {
@@ -14,17 +14,21 @@ namespace Stenography.Forms
     public partial class DecryptForm : Form
     {
         #region Fields
-        /// <summary>
-        /// The <see cref="IEncryptionProvider"/> used for decrypting data. 
-        /// </summary>
-        IEncryptionProvider EncryptionProvider;
 
         /// <summary>
-        /// The <see cref="IStorageProvider"/> used for reading files. 
+        /// The <see cref="IEncryptionProvider" /> used for decrypting data.
         /// </summary>
-        IStorageProvider StorageProvider;
+        private readonly IEncryptionProvider _encryptionProvider;
+
+        /// <summary>
+        /// The <see cref="IStorageProvider" /> used for reading files.
+        /// </summary>
+        private readonly IStorageProvider _storageProvider;
+
         #endregion
+
         #region Constructor
+
         public DecryptForm()
         {
             InitializeComponent();
@@ -32,46 +36,50 @@ namespace Stenography.Forms
 
         public DecryptForm(IEncryptionProvider encryptionProvider, IStorageProvider storageProvider) : this()
         {
-            EncryptionProvider = encryptionProvider;
-            StorageProvider = storageProvider;
+            _encryptionProvider = encryptionProvider;
+            _storageProvider = storageProvider;
         }
+
         #endregion
+
         #region Methods
+
         private void BtnBrowse_Click(object sender, EventArgs e)
         {
-            OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = StorageProvider.ExportFileDialogFilter;
-            if (dialog.ShowDialog() == DialogResult.OK)
+            OpenFileDialog dialog = new OpenFileDialog
             {
-                // Get file path
-                string filePath = dialog.FileName;
+                Filter = _storageProvider.ExportFileDialogFilter
+            };
 
-                // Free memory
-                dialog.Dispose();
+            // Show dialog
+            if (dialog.ShowDialog() != DialogResult.OK) return;
 
-                // Set file name label
-                LblFilePath.Text = Path.GetFileName(filePath);
+            // Get file path
+            string filePath = dialog.FileName;
 
-                // Create worker arguments
-                Tuple<IEncryptionProvider, IStorageProvider, string> args =
-                    new Tuple<IEncryptionProvider, IStorageProvider, string>(
-                        EncryptionProvider,
-                        StorageProvider,
-                        filePath
-                    );
+            // Free memory
+            dialog.Dispose();
 
-                // Run worker, disable button and start progress bar
-                BtnBrowse.Enabled = false;
-                Progress.Style = ProgressBarStyle.Marquee;
-                Worker.RunWorkerAsync(args);
-            }
+            // Set file name label
+            LblFilePath.Text = Path.GetFileName(filePath);
+
+            // Create worker arguments
+            Tuple<IEncryptionProvider, IStorageProvider, string> args =
+                new Tuple<IEncryptionProvider, IStorageProvider, string>(_encryptionProvider,
+                                                                         _storageProvider,
+                                                                         filePath);
+
+            // Run worker, disable button and start progress bar
+            BtnBrowse.Enabled = false;
+            Progress.Style = ProgressBarStyle.Marquee;
+            Worker.RunWorkerAsync(args);
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
         {
             // Get arguments
             Tuple<IEncryptionProvider, IStorageProvider, string> args =
-                (Tuple< IEncryptionProvider, IStorageProvider, string>)e.Argument;
+                (Tuple<IEncryptionProvider, IStorageProvider, string>)e.Argument;
 
             IEncryptionProvider encryptionProvider = args.Item1;
             IStorageProvider storageProvider = args.Item2;
@@ -96,7 +104,7 @@ namespace Stenography.Forms
             {
                 plainText = encryptionProvider.Decrypt(cipherText);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 // Exception occured whilst decrypting text, so wrap
                 // exception nicely for display output
@@ -126,6 +134,7 @@ namespace Stenography.Forms
                 MessageBox.Show(e.Error.Message);
             }
         }
+
         #endregion
     }
 }

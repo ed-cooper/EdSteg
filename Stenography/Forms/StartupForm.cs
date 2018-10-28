@@ -1,8 +1,8 @@
-﻿using Stenography.Encryption;
-using Stenography.Storage;
-using System;
+﻿using System;
 using System.Text;
 using System.Windows.Forms;
+using Stenography.Encryption;
+using Stenography.Storage;
 
 namespace Stenography.Forms
 {
@@ -12,12 +12,16 @@ namespace Stenography.Forms
     public partial class StartupForm : Form
     {
         #region Constructor
+
         public StartupForm()
         {
             InitializeComponent();
         }
+
         #endregion
+
         #region Methods
+
         private void FormMain_Load(object sender, EventArgs e)
         {
             // Set defaults
@@ -49,7 +53,8 @@ namespace Stenography.Forms
                 MessageBox.Show("Please enter a key");
                 return false;
             }
-            else if (TxtKey.Text.Length < 8)
+
+            if (TxtKey.Text.Length < 8)
             {
                 // Key not long enough (min 8 characters)
                 MessageBox.Show("Keys must be longer than 8 characters for security");
@@ -61,9 +66,9 @@ namespace Stenography.Forms
         }
 
         /// <summary>
-        /// Returns the selected <see cref="IEncryptionProvider"/> object.
+        /// Returns the selected <see cref="IEncryptionProvider" /> object.
         /// </summary>
-        /// <returns>The selected <see cref="IEncryptionProvider"/> object.</returns>
+        /// <returns>The selected <see cref="IEncryptionProvider" /> object.</returns>
         protected virtual IEncryptionProvider GetEncrpytionProvider()
         {
             byte[] key = Encoding.UTF8.GetBytes(TxtKey.Text);
@@ -78,9 +83,9 @@ namespace Stenography.Forms
         }
 
         /// <summary>
-        /// Returns the selected <see cref="IStorageProvider"/> object. 
+        /// Returns the selected <see cref="IStorageProvider" /> object.
         /// </summary>
-        /// <returns>The selected <see cref="IStorageProvider"/> object.</returns>
+        /// <returns>The selected <see cref="IStorageProvider" /> object.</returns>
         protected virtual IStorageProvider GetStorageProvder()
         {
             switch (CmbStorage.SelectedIndex)
@@ -91,6 +96,7 @@ namespace Stenography.Forms
                     throw new ArgumentException("Unknown selected index for CmbStorage");
             }
         }
+
         #endregion
     }
 }

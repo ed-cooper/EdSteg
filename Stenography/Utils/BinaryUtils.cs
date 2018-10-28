@@ -1,8 +1,12 @@
 ﻿namespace Stenography.Utils
 {
+    /// <summary>
+    /// Provides utility methods for dealing with binary numbers.
+    /// </summary>
     public static class BinaryUtils
     {
         #region Methods
+
         /// <summary>
         /// Sets the bit at the specified position to the specified value.
         /// </summary>
@@ -13,7 +17,7 @@
         public static byte SetBit(this byte original, int pos, bool value)
         {
             if (value)
-                return (byte)(original | 1 << pos);
+                return (byte)(original | (1 << pos));
 
             return (byte)(original & ~(1 << pos));
         }
@@ -26,8 +30,9 @@
         /// <returns>The bit at the specified position.</returns>
         public static bool GetBit(this byte value, int pos)
         {
-            return (value & 1 << pos) != 0;
+            return (value & (1 << pos)) != 0;
         }
+
         #endregion
     }
 }

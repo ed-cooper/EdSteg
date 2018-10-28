@@ -8,42 +8,44 @@ namespace Stenography.Encryption
     /// </summary>
     public class XCrypt : IEncryptionProvider
     {
+
         #region Properties
+
         /// <summary>
         /// Gets or sets the key used for encryption.
         /// </summary>
         public byte[] Key { get; set; }
+
         #endregion
+
         #region Constructor
+
         /// <summary>
-        /// Creates a new instance of the <see cref="XCrypt"/> class. 
+        /// Creates a new instance of the <see cref="XCrypt" /> class.
         /// </summary>
         /// <param name="key">The key to use for encryption.</param>
         public XCrypt(byte[] key)
         {
             Key = key;
         }
+
         #endregion
+
         #region Methods
+
         /// <summary>
         /// Encrypts the specified plain text.
         /// </summary>
         /// <param name="plainText">The plain text to encrypt.</param>
         /// <returns>The encrypted version of the plain text.</returns>
-        public byte[] Encrypt(byte[] plainText)
-        {
-            return Crypt(plainText);
-        }
+        public byte[] Encrypt(byte[] plainText) => Crypt(plainText);
 
         /// <summary>
         /// Decrypts the specified cipher text.
         /// </summary>
         /// <param name="cipherText">The cipher text to decrypt.</param>
         /// <returns>The original plain text.</returns>
-        public byte[] Decrypt(byte[] cipherText)
-        {
-            return Crypt(cipherText);
-        }
+        public byte[] Decrypt(byte[] cipherText) => Crypt(cipherText);
 
         /// <summary>
         /// Encrypts or decrypts the data.
@@ -53,10 +55,10 @@ namespace Stenography.Encryption
         /// <remarks>Use parallelism for efficiency.</remarks>
         protected virtual byte[] Crypt(byte[] data)
         {
-            if (Key != null && Key.Length > 0)
+            if ((Key != null) && (Key.Length > 0))
             {
                 byte[] cipher = new byte[data.Length];
-                
+
                 // Make each processor carry out a portion of the work
                 int degreeOfParallelism = Environment.ProcessorCount;
                 Task[] tasks = new Task[degreeOfParallelism];
@@ -67,16 +69,15 @@ namespace Stenography.Encryption
                     // Prevents access issues of taskNumber from the lamba
                     int currentTaskCopy = currentTask;
 
-                    tasks[currentTask] = Task.Factory.StartNew(() => {
+                    tasks[currentTask] = Task.Factory.StartNew(() =>
+                    {
                         // Cacha upper limit
                         int max = data.Length * (currentTaskCopy + 1) / degreeOfParallelism;
 
                         // Do work portion
                         for (int i = data.Length * currentTaskCopy / degreeOfParallelism; i < max; i++)
-                        {
                             // Use XOR with key
                             cipher[i] = (byte)(data[i] ^ Key[i % Key.Length]);
-                        }
                     });
                 }
 
@@ -86,11 +87,10 @@ namespace Stenography.Encryption
                 // Return output
                 return cipher;
             }
-            else
-            {
-                throw new InvalidOperationException("Invalid key");
-            }
+
+            throw new InvalidOperationException("Invalid key");
         }
+
         #endregion
     }
 }
