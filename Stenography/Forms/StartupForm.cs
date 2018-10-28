@@ -57,7 +57,7 @@ namespace Stenography.Forms
             if (TxtKey.Text.Length < 8)
             {
                 // Key not long enough (min 8 characters)
-                MessageBox.Show("Keys must be longer than 8 characters for security");
+                MessageBox.Show("Keys must be at least 8 characters for security");
                 return false;
             }
 
