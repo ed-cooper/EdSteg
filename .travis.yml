@@ -2,8 +2,7 @@ language: csharp
 solution: Stenography.sln
 install:
   - nuget restore Stenography.sln
-  - nuget install NUnit.Runners -Version 3.9.0 -OutputDirectory testrunner
+  - nuget install NUnit.ConsoleRunner -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release Stenography.sln
-  - ls -a ./testrunner/NUnit.Runners.3.9.0/tools/
-  - mono ./testrunner/NUnit.Runners.3.9.0/tools/nunit3-console.exe ./StenographyTests/bin/Release/StenographyTests.dll
+  - mono ./testrunner/NUnit.ConsoleRunner.3.5.0/tools/nunit3-console.exe ./StenographyTests/bin/Release/StenographyTests.dll
