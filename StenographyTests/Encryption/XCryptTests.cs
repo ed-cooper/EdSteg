@@ -1,17 +1,13 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Stenography.Encryption;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Text;
-using System.Threading.Tasks;
+using NUnit.Framework;
 
 namespace Stenography.Encryption.Tests
 {
-    [TestClass()]
+    [TestFixture]
     public class XCryptTests
     {
-        [TestMethod()]
+        [Test]
         public void XCryptTest()
         {
             byte[] key = Encoding.UTF8.GetBytes("12345");
@@ -20,7 +16,7 @@ namespace Stenography.Encryption.Tests
             Assert.AreEqual(crypt.Key, key);
         }
 
-        [TestMethod()]
+        [Test]
         public void EncryptTest()
         {
             byte[] key = Encoding.UTF8.GetBytes("12345");
@@ -31,18 +27,17 @@ namespace Stenography.Encryption.Tests
             CollectionAssert.AreEqual(crypt.Encrypt(plainText), cipherText);
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [Test]
         public void EncryptTest_EmptyKey()
         {
             byte[] key = new byte[0];
             XCrypt crypt = new XCrypt(key);
             byte[] plainText = Encoding.UTF8.GetBytes("sample");
 
-            crypt.Encrypt(plainText);
+            Assert.Throws<InvalidOperationException>(() => crypt.Encrypt(plainText));
         }
 
-        [TestMethod()]
+        [Test]
         public void DecryptTest()
         {
             byte[] key = Encoding.UTF8.GetBytes("12345");
@@ -53,15 +48,14 @@ namespace Stenography.Encryption.Tests
             CollectionAssert.AreEqual(crypt.Decrypt(cipherText), plainText);
         }
 
-        [TestMethod()]
-        [ExpectedException(typeof(InvalidOperationException))]
+        [Test]
         public void DecryptTest_EmptyKey()
         {
             byte[] key = new byte[0];
             XCrypt crypt = new XCrypt(key);
             byte[] cipherText = Encoding.UTF8.GetBytes("BS^DYT");
 
-            crypt.Decrypt(cipherText);
+            Assert.Throws<InvalidOperationException>(() => crypt.Decrypt(cipherText));
         }
     }
 }
