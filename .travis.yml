@@ -1,2 +1,8 @@
 language: csharp
 solution: Stenography.sln
+install:
+  - nuget restore Stenography.sln
+  - nuget install NUnit.Runners -Version 2.6.4 -OutputDirectory testrunner
+script:
+  - xbuild /p:Configuration=Release solution-name.sln
+  - mono ./testrunner/NUnit.Runners.2.6.4/tools/nunit-console.exe ./StenographyTests/bin/Release/StenographyTests.dll
