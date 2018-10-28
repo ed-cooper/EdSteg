@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Screenshots", "Screenshots"
 		Screenshots\Screenshot 3.png = Screenshots\Screenshot 3.png
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StenographyTests", "StenographyTests\StenographyTests.csproj", "{7541B42B-7289-4A28-ABA3-CD60277681C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{21FF2E78-9B94-4823-A7C8-05CF57000BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{21FF2E78-9B94-4823-A7C8-05CF57000BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{21FF2E78-9B94-4823-A7C8-05CF57000BE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7541B42B-7289-4A28-ABA3-CD60277681C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7541B42B-7289-4A28-ABA3-CD60277681C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7541B42B-7289-4A28-ABA3-CD60277681C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7541B42B-7289-4A28-ABA3-CD60277681C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
