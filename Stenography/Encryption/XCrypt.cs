@@ -55,40 +55,40 @@ namespace Stenography.Encryption
         /// <remarks>Use parallelism for efficiency.</remarks>
         protected virtual byte[] Crypt(byte[] data)
         {
-            if ((Key != null) && (Key.Length > 0))
+            // Check key is valid
+            if ((Key == null) || (Key.Length <= 0)) throw new InvalidOperationException("Invalid key");
+
+            // Key is valid, create cipher output
+            byte[] cipher = new byte[data.Length];
+
+            // Make each processor carry out a portion of the work
+            int degreeOfParallelism = Environment.ProcessorCount;
+            Task[] tasks = new Task[degreeOfParallelism];
+
+            // For each task
+            for (int currentTask = 0; currentTask < degreeOfParallelism; currentTask++)
             {
-                byte[] cipher = new byte[data.Length];
+                // Prevents access issues of taskNumber from the lamba
+                int currentTaskCopy = currentTask;
 
-                // Make each processor carry out a portion of the work
-                int degreeOfParallelism = Environment.ProcessorCount;
-                Task[] tasks = new Task[degreeOfParallelism];
-
-                // For each task
-                for (int currentTask = 0; currentTask < degreeOfParallelism; currentTask++)
+                tasks[currentTask] = Task.Factory.StartNew(() =>
                 {
-                    // Prevents access issues of taskNumber from the lamba
-                    int currentTaskCopy = currentTask;
+                    // Cacha upper limit
+                    int max = data.Length * (currentTaskCopy + 1) / degreeOfParallelism;
 
-                    tasks[currentTask] = Task.Factory.StartNew(() =>
-                    {
-                        // Cacha upper limit
-                        int max = data.Length * (currentTaskCopy + 1) / degreeOfParallelism;
-
-                        // Do work portion
-                        for (int i = data.Length * currentTaskCopy / degreeOfParallelism; i < max; i++)
-                            // Use XOR with key
-                            cipher[i] = (byte)(data[i] ^ Key[i % Key.Length]);
-                    });
-                }
-
-                // Wait for all tasks to complete
-                Task.WaitAll(tasks);
-
-                // Return output
-                return cipher;
+                    // Do work portion
+                    for (int i = data.Length * currentTaskCopy / degreeOfParallelism; i < max; i++)
+                        // Use XOR with key
+                        cipher[i] = (byte)(data[i] ^ Key[i % Key.Length]);
+                });
             }
 
-            throw new InvalidOperationException("Invalid key");
+            // Wait for all tasks to complete
+            Task.WaitAll(tasks);
+
+            // Return output
+            return cipher;
+
         }
 
         #endregion
