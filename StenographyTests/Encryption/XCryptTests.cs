@@ -22,7 +22,7 @@ namespace Stenography.Encryption.Tests
             byte[] key = Encoding.UTF8.GetBytes("12345");
             XCrypt crypt = new XCrypt(key);
             byte[] plainText = Encoding.UTF8.GetBytes("sample");
-            byte[] cipherText = Encoding.UTF8.GetBytes("BS^DYT");
+            byte[] cipherText = Encoding.UTF8.GetBytes("error");
 
             CollectionAssert.AreEqual(crypt.Encrypt(plainText), cipherText);
         }
