@@ -36,7 +36,7 @@ namespace Stenography.Encryption.Tests
         {
             byte[] key = Encoding.UTF8.GetBytes("12345");
             XCrypt crypt = new XCrypt(key);
-            byte[] cipherText = Encoding.UTF8.GetBytes("BS^DYT");
+            byte[] cipherText = Encoding.UTF8.GetBytes("error");
             byte[] plainText = Encoding.UTF8.GetBytes("sample");
 
             CollectionAssert.AreEqual(crypt.Decrypt(cipherText), plainText);
