@@ -68,7 +68,7 @@ namespace Stenography.Encryption
             // For each task
             for (int currentTask = 0; currentTask < degreeOfParallelism; currentTask++)
             {
-                // Prevents access issues of taskNumber from the lamba
+                // Prevents access issues of taskNumber from the lambda
                 int currentTaskCopy = currentTask;
 
                 tasks[currentTask] = Task.Factory.StartNew(() =>
