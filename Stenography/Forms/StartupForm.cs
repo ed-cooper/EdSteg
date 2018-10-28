@@ -78,7 +78,7 @@ namespace Stenography.Forms
                 case 0: // XOR Crypt (default)
                     return new XCrypt(key);
                 default:
-                    throw new ArgumentException("Unknown selected index for CmbEncryption");
+                    throw new ArgumentException("Unknown selected index for CmbEncryption", nameof(CmbEncryption.SelectedIndex));
             }
         }
 
@@ -93,7 +93,7 @@ namespace Stenography.Forms
                 case 0: // LSB (default)
                     return new LsbStorageProvider();
                 default:
-                    throw new ArgumentException("Unknown selected index for CmbStorage");
+                    throw new ArgumentException("Unknown selected index for CmbStorage", nameof(CmbStorage.SelectedIndex));
             }
         }
 

@@ -65,7 +65,7 @@ namespace Stenography.Storage
             // Check original file path and save file path are not the same
             // (Otherwise ExternalException will occur on image.Save)
             if (file == newPath)
-                throw new ArgumentException("Original file path cannot be same as save file path");
+                throw new ArgumentException("Original file path cannot be same as save file path", nameof(file));
 
             // Create file header (stores data length)
             byte[] header = BitConverter.GetBytes(data.Length);
@@ -87,7 +87,7 @@ namespace Stenography.Storage
 
             // Check image is big enough to store all data
             if (image.Width * image.Height * BitStoragePerPixel < bitData.Length)
-                throw new ArgumentException("Data too large to store in image");
+                throw new ArgumentException("Data too large to store in image", nameof(data));
 
             // Get bitmap data and lock in memory
             BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
