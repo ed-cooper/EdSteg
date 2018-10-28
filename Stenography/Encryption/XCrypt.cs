@@ -61,7 +61,7 @@ namespace Stenography.Encryption
             // Key is valid, create cipher output
             byte[] cipher = new byte[data.Length];
 
-            // Make each processor carry out a portion of the work
+            // Make each processor thread carry out a portion of the work
             int degreeOfParallelism = Environment.ProcessorCount;
             Task[] tasks = new Task[degreeOfParallelism];
 
