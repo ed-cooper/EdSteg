@@ -5,4 +5,5 @@ install:
   - nuget install NUnit.Runners -Version 3.9.0 -OutputDirectory testrunner
 script:
   - xbuild /p:Configuration=Release Stenography.sln
-  - mono ./testrunner/NUnit.Runners.3.9.0/tools/nunit-console.exe ./StenographyTests/bin/Release/StenographyTests.dll
+  - ls -a ./testrunner/NUnit.Runners.3.9.0/tools/
+  - mono ./testrunner/NUnit.Runners.3.9.0/tools/nunit3-console.exe ./StenographyTests/bin/Release/StenographyTests.dll
