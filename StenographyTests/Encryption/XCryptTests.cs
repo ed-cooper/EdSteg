@@ -19,5 +19,27 @@ namespace Stenography.Encryption.Tests
 
             Assert.AreEqual(crypt.Key, key);
         }
+
+        [TestMethod()]
+        public void EncryptTest()
+        {
+            byte[] key = Encoding.UTF8.GetBytes("12345");
+            XCrypt crypt = new XCrypt(key);
+            byte[] plainText = Encoding.UTF8.GetBytes("sample");
+            byte[] cipherText = Encoding.UTF8.GetBytes("BS^DYT");
+
+            CollectionAssert.AreEqual(crypt.Encrypt(plainText), cipherText);
+        }
+
+        [TestMethod()]
+        public void DecryptTest()
+        {
+            byte[] key = Encoding.UTF8.GetBytes("12345");
+            XCrypt crypt = new XCrypt(key);
+            byte[] cipherText = Encoding.UTF8.GetBytes("BS^DYT");
+            byte[] plainText = Encoding.UTF8.GetBytes("sample");
+
+            CollectionAssert.AreEqual(crypt.Decrypt(cipherText), plainText);
+        }
     }
 }
