@@ -11,9 +11,10 @@ namespace Stenography.Encryption.Tests
         public void XCryptTest()
         {
             byte[] key = Encoding.UTF8.GetBytes("12345");
+
             XCrypt crypt = new XCrypt(key);
 
-            Assert.AreEqual(crypt.Key, key);
+            Assert.AreEqual(key, crypt.Key);
         }
 
         [Test]
@@ -22,9 +23,11 @@ namespace Stenography.Encryption.Tests
             byte[] key = Encoding.UTF8.GetBytes("12345");
             XCrypt crypt = new XCrypt(key);
             byte[] plainText = Encoding.UTF8.GetBytes("sample");
-            byte[] cipherText = Encoding.UTF8.GetBytes("BS^DYT");
+            byte[] expected = Encoding.UTF8.GetBytes("BS^DYT");
 
-            CollectionAssert.AreEqual(crypt.Encrypt(plainText), cipherText);
+            byte[] actual = crypt.Encrypt(plainText);
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -43,9 +46,11 @@ namespace Stenography.Encryption.Tests
             byte[] key = Encoding.UTF8.GetBytes("12345");
             XCrypt crypt = new XCrypt(key);
             byte[] cipherText = Encoding.UTF8.GetBytes("BS^DYT");
-            byte[] plainText = Encoding.UTF8.GetBytes("sample");
+            byte[] expected = Encoding.UTF8.GetBytes("sample");
 
-            CollectionAssert.AreEqual(crypt.Decrypt(cipherText), plainText);
+            byte[] actual = crypt.Decrypt(cipherText);
+
+            CollectionAssert.AreEqual(expected, actual);
         }
 
         [Test]

@@ -11,7 +11,9 @@ namespace Stenography.Utils.Tests
             const byte original = 0b00001000;
             const byte expected = 0b00001100;
 
-            Assert.AreEqual(BinaryUtils.SetBit(original, 2, true), expected);
+            byte actual = BinaryUtils.SetBit(original, 2, true);
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -20,7 +22,9 @@ namespace Stenography.Utils.Tests
             const byte original = 0b11110111;
             const byte expected = 0b11110011;
 
-            Assert.AreEqual(BinaryUtils.SetBit(original, 2, false), expected);
+            byte actual = BinaryUtils.SetBit(original, 2, false);
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -29,7 +33,9 @@ namespace Stenography.Utils.Tests
             const byte value = 0b00001000;
             const bool expected = true;
 
-            Assert.AreEqual(BinaryUtils.GetBit(value, 3), expected);
+            bool actual = BinaryUtils.GetBit(value, 3);
+
+            Assert.AreEqual(expected, actual);
         }
 
         [Test]
@@ -38,7 +44,9 @@ namespace Stenography.Utils.Tests
             const byte value = 0b11101111;
             const bool expected = false;
 
-            Assert.AreEqual(BinaryUtils.GetBit(value, 4), expected);
+            bool actual = BinaryUtils.GetBit(value, 4);
+
+            Assert.AreEqual(expected, actual);
         }
     }
 }
