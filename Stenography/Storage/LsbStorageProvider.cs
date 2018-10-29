@@ -32,6 +32,7 @@ namespace Stenography.Storage
         /// <summary>
         /// The number of bits that can be stored per pixel.
         /// </summary>
+        /// <remarks>Subtract BytesPerChannel to take alpha channel into account.</remarks>
         protected const byte BitStoragePerPixel = BytesPerPixel - BytesPerChannel;
 
         #endregion
