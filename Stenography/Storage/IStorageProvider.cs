@@ -1,4 +1,6 @@
-﻿namespace Stenography.Storage
+﻿using Stenography.Noise;
+
+namespace Stenography.Storage
 {
     /// <summary>
     /// Provides storage of encrpyted data using a specific stenography system.
@@ -16,6 +18,11 @@
         /// Gets the dialog file filter to be used for browsing exported files.
         /// </summary>
         string ExportFileDialogFilter { get; }
+
+        /// <summary>
+        /// Gets the noise provider used to disguise the end of the data in an image.
+        /// </summary>
+        INoiseProvider NoiseProvider { get; }
 
         #endregion
 

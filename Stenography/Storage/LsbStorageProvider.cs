@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Drawing;
 using System.Drawing.Imaging;
+using Stenography.Noise;
 using Stenography.Utils;
 
 namespace Stenography.Storage
@@ -55,6 +56,32 @@ namespace Stenography.Storage
         /// </summary>
         public string ExportFileDialogFilter { get; } =
             "PNG Files (*.png)|*.png|All Files (*.*)|*.*";
+
+        /// <summary>
+        /// Gets the noise provider used to disguise the end of the data in an image.
+        /// </summary>
+        public INoiseProvider NoiseProvider { get; }
+
+        #endregion
+
+        #region Constructor
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="LsbStorageProvider" /> class.
+        /// </summary>
+        public LsbStorageProvider()
+        {
+            NoiseProvider = new RandomNoiseProvider();
+        }
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="LsbStorageProvider" /> class.
+        /// </summary>
+        /// <param name="noiseProvider">The noise provider used to disguise the end of the data in an image.</param>
+        public LsbStorageProvider(INoiseProvider noiseProvider)
+        {
+            NoiseProvider = new RandomNoiseProvider();
+        }
 
         #endregion
 
