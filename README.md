@@ -3,6 +3,10 @@ An educational stenography project to hide messages within images.
 
 This is an old project of mine that was chosen to practice the use of unsafe code within C# for image manipulation.
 
+I have since updated it to reflect better coding practices and add unit testing with continuous integration through Travis CI.
+
+**Note:** This project is purely educational and the encoding is neither secure nor hard to detect. Please look elsewhere if you desire this.
+
 ## Screenshots
 
 ### Startup Form
