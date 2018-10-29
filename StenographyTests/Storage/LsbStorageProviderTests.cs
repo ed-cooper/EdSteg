@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Drawing;
 using System.IO;
 using NUnit.Framework;
 using Stenography.Noise;
@@ -34,12 +35,35 @@ namespace Stenography.Storage.Tests
             Console.WriteLine(System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(outputFile)));
             Console.WriteLine(System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(expectedFile)));
 
+            // Load images
+            Bitmap expected = new Bitmap(expectedFile);
+            Bitmap actual = new Bitmap(outputFile);
+
             try
             {
-                FileAssert.AreEqual(expectedFile, outputFile);
+                bool fail = (expected.Width != actual.Width) || (expected.Height != actual.Height);
+
+                if (!fail)
+                {
+                    // Compare pixel by pixel (due to encoding differences on Mono)
+                    for (int i = 0; i < expected.Width; i++)
+                    {
+                        for (int j = 0; j < expected.Height; j++)
+                        {
+                            if (expected.GetPixel(i, j) != actual.GetPixel(i, j))
+                            {
+                                fail = true;
+                            }
+                        }
+                    }
+                }
+
+                Assert.AreEqual(false, fail);
             }
             finally
             {
+                expected.Dispose();
+                actual.Dispose();
                 File.Delete(outputFile);
             }
         }
