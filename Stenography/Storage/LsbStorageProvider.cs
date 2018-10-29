@@ -86,7 +86,7 @@ namespace Stenography.Storage
             Bitmap image = new Bitmap(file);
 
             // Check image is big enough to store all data
-            if (image.Width * image.Height * BitStoragePerPixel < bitData.Length)
+            if (GetStoragePotential(image) < bitData.Length)
                 throw new ArgumentException("Data too large to store in image", nameof(data));
 
             // Get bitmap data and lock in memory
@@ -253,6 +253,16 @@ namespace Stenography.Storage
                 return 0;
             }
 
+            return GetStoragePotential(image);
+        }
+
+        /// <summary>
+        /// Returns the max number of bytes that could be encoded within the specified image.
+        /// </summary>
+        /// <param name="image">The image to test.</param>
+        /// <returns>The max number of bytes that could be encoded within the specified image.</returns>
+        private int GetStoragePotential(Image image)
+        {
             return image.Width * image.Height * BitStoragePerPixel / 8 - 4;
         }
 
