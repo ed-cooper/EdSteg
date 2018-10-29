@@ -195,7 +195,7 @@ namespace Stenography.Storage
                         if ((*scan).GetBit(0))
                             byteData[bitCount / 8] |= (byte)(1 << (bitCount % 8));
 
-                        // Increment bit count
+                        // Move to next bit
                         bitCount++;
                     }
 
