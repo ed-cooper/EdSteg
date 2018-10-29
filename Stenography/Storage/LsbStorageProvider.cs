@@ -80,7 +80,7 @@ namespace Stenography.Storage
         /// <param name="noiseProvider">The noise provider used to disguise the end of the data in an image.</param>
         public LsbStorageProvider(INoiseProvider noiseProvider)
         {
-            NoiseProvider = new RandomNoiseProvider();
+            NoiseProvider = noiseProvider;
         }
 
         #endregion
