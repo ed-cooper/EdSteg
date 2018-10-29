@@ -35,6 +35,11 @@ namespace Stenography.Storage
         /// <remarks>Subtract BytesPerChannel to take alpha channel into account.</remarks>
         protected const byte BitStoragePerPixel = BytesPerPixel - BytesPerChannel;
 
+        /// <summary>
+        /// The size in bytes of the steg data header.
+        /// </summary>
+        protected const byte HeaderSize = 4;
+
         #endregion
 
         #region Properties
@@ -164,7 +169,7 @@ namespace Stenography.Storage
             Bitmap image = new Bitmap(path);
 
             // Create array to store read data
-            byte[] byteData = new byte[GetStoragePotential(image) + 4];
+            byte[] byteData = new byte[GetStoragePotential(image) + HeaderSize];
 
             // Get bitmap data and lock in memory
             BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
@@ -225,12 +230,12 @@ namespace Stenography.Storage
                 length = BitConverter.ToInt32(byteData, 0);
 
             // Check length is valid
-            if (length + 4 > byteData.Length)
+            if (length + HeaderSize > byteData.Length)
                 throw new InvalidOperationException("Steg data is corrupt");
 
             // Get relevant data
             byte[] data = new byte[length];
-            Buffer.BlockCopy(byteData, 4, data, 0, length);
+            Buffer.BlockCopy(byteData, HeaderSize, data, 0, length);
 
             // Return data
             return data;
@@ -264,7 +269,7 @@ namespace Stenography.Storage
         /// <returns>The max number of bytes that could be encoded within the specified image.</returns>
         private int GetStoragePotential(Image image)
         {
-            return image.Width * image.Height * BitStoragePerPixel / 8 - 4;
+            return image.Width * image.Height * BitStoragePerPixel / 8 - HeaderSize;
         }
 
         #endregion
