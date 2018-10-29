@@ -30,6 +30,24 @@ namespace Stenography.Storage.Tests
         }
 
         [Test]
+        public void SaveTest_DataTooLarge()
+        {
+            LsbStorageProvider provider = new LsbStorageProvider();
+            string inputFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage0.png");
+            string outputFile = Path.GetTempFileName();
+            byte[] saveData = { 66, 83, 94, 68, 89, 84, 66, 83, 94, 68, 89, 84 };
+
+            try
+            {
+                Assert.Throws<ArgumentException>(() => provider.Save(inputFile, outputFile, saveData));
+            }
+            finally
+            {
+                File.Delete(outputFile);
+            }
+        }
+
+        [Test]
         public void ReadTest()
         {
             LsbStorageProvider provider = new LsbStorageProvider();
