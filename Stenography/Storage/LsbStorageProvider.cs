@@ -127,9 +127,6 @@ namespace Stenography.Storage
                                                 ImageLockMode.ReadWrite,
                                                 PixelDataFormat);
 
-            // Create random number generator
-            Random rand = new Random();
-
             // Scan start position
             byte* scan0 = (byte*)bmpData.Scan0;
 
@@ -162,8 +159,8 @@ namespace Stenography.Storage
                         }
                         else
                         {
-                            // Use random value (to disguise end of data)
-                            value = rand.NextDouble() > 0.5;
+                            // Create noise to disguise the end of the data
+                            value = NoiseProvider.Next();
                         }
 
                         // Set LSB to value
