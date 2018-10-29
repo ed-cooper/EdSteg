@@ -60,12 +60,13 @@ namespace Stenography.Storage.Tests
         [Test]
         public void ReadTest()
         {
-            // Travis test:
-            Console.WriteLine(TestContext.CurrentContext.TestDirectory);
-
             LsbStorageProvider provider = new LsbStorageProvider();
             string filename = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage1.png");
             byte[] expected = { 66, 83, 94, 68, 89, 84 };
+
+            // Travis test:
+            Console.WriteLine(filename);
+            Console.WriteLine(System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(filename)));
 
             byte[] actual = provider.Read(filename);
 
