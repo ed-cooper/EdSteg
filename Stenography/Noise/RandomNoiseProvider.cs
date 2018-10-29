@@ -19,7 +19,7 @@ namespace Stenography.Noise
         #region Constructor
 
         /// <summary>
-        /// Creates a new instancer of the <see cref="RandomNoiseProvider"/> class.
+        /// Creates a new instance of the <see cref="RandomNoiseProvider"/> class.
         /// </summary>
         public RandomNoiseProvider()
         {
@@ -27,7 +27,7 @@ namespace Stenography.Noise
         }
 
         /// <summary>
-        /// Creates a new instancer of the <see cref="RandomNoiseProvider"/> class.
+        /// Creates a new instance of the <see cref="RandomNoiseProvider"/> class.
         /// </summary>
         /// <param name="seed">A number used to calculate the starting value for the pseudo-random sequence.</param>
         public RandomNoiseProvider(int seed)
