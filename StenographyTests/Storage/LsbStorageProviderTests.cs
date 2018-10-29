@@ -9,6 +9,16 @@ namespace Stenography.Storage.Tests
     public class LsbStorageProviderTests
     {
         [Test]
+        public void ConstructorTest()
+        {
+            INoiseProvider noiseProvider = new ConstantNoiseProvider();
+
+            LsbStorageProvider storageProvider = new LsbStorageProvider(noiseProvider);
+
+            Assert.AreEqual(noiseProvider, storageProvider.NoiseProvider);
+        }
+
+        [Test]
         public void SaveTest()
         {
             LsbStorageProvider provider = new LsbStorageProvider(new ConstantNoiseProvider());
