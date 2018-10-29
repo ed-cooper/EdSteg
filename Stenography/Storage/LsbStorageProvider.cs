@@ -163,13 +163,13 @@ namespace Stenography.Storage
             // Load image from file
             Bitmap image = new Bitmap(path);
 
+            // Create array to store read data
+            byte[] byteData = new byte[GetStoragePotential(image) + 4];
+
             // Get bitmap data and lock in memory
             BitmapData bmpData = image.LockBits(new Rectangle(0, 0, image.Width, image.Height),
                                                 ImageLockMode.ReadWrite,
                                                 PixelDataFormat);
-
-            // Store steg data from image
-            byte[] byteData = new byte[bmpData.Width * bmpData.Width / 8 * (BytesPerPixel - 1) * BytesPerChannel];
 
             // Scan start position
             byte* scan0 = (byte*)bmpData.Scan0;
