@@ -22,9 +22,9 @@ namespace Stenography.Storage.Tests
         public void SaveTest()
         {
             LsbStorageProvider provider = new LsbStorageProvider(new ConstantNoiseProvider());
-            string inputFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage0.png");
+            string inputFile = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage0.png");
             string outputFile = Path.GetTempFileName();
-            string expectedFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage1.png");
+            string expectedFile = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage1.png");
             byte[] saveData = { 66, 83, 94, 68, 89, 84 };
 
             provider.Save(inputFile, outputFile, saveData);
@@ -43,7 +43,7 @@ namespace Stenography.Storage.Tests
         public void SaveTest_DataTooLarge()
         {
             LsbStorageProvider provider = new LsbStorageProvider();
-            string inputFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage0.png");
+            string inputFile = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage0.png");
             string outputFile = Path.GetTempFileName();
             byte[] saveData = { 66, 83, 94, 68, 89, 84, 66, 83, 94, 68, 89, 84 };
 
@@ -61,7 +61,7 @@ namespace Stenography.Storage.Tests
         public void ReadTest()
         {
             LsbStorageProvider provider = new LsbStorageProvider();
-            string filename = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage1.png");
+            string filename = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage1.png");
             byte[] expected = { 66, 83, 94, 68, 89, 84 };
 
             // Travis test:
@@ -77,7 +77,7 @@ namespace Stenography.Storage.Tests
         public void ReadTest_Corrupt()
         {
             LsbStorageProvider provider = new LsbStorageProvider();
-            string filename = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage2.png");
+            string filename = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage2.png");
 
             Assert.Throws<InvalidOperationException>(() => provider.Read(filename));
         }
@@ -86,7 +86,7 @@ namespace Stenography.Storage.Tests
         public void GetStoragePotentialTest()
         {
             LsbStorageProvider provider = new LsbStorageProvider();
-            string filename = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage0.png");
+            string filename = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage0.png");
             int expected = 9;
 
             int actual = provider.GetStoragePotential(filename);
