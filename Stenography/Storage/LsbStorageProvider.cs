@@ -189,7 +189,7 @@ namespace Stenography.Storage
             for (int i = 0; i < bmpData.Height; i++)
             {
                 // For each byte in each column (that contains data)
-                for (int j = 0; j < bmpData.Width * BytesPerPixel; j++)
+                for (int j = 0; (j < bmpData.Width * BytesPerPixel) && (bitCount / 8 < byteData.Length); j++)
                 {
                     // Get pointer to current byte
                     byte* scan = scan0 + i * bmpData.Stride + j * BytesPerChannel;
