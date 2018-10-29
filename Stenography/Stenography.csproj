@@ -75,6 +75,7 @@
       <DependentUpon>StartupForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Noise\INoiseProvider.cs" />
+    <Compile Include="Noise\ConstantNoiseProvider.cs" />
     <Compile Include="Noise\RandomNoiseProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
