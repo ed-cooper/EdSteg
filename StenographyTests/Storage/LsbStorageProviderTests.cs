@@ -23,11 +23,16 @@ namespace Stenography.Storage.Tests
         {
             LsbStorageProvider provider = new LsbStorageProvider(new ConstantNoiseProvider());
             string inputFile = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage0.png");
-            string outputFile = Path.GetTempFileName();
+            string outputFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.png");
             string expectedFile = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage1.png");
             byte[] saveData = { 66, 83, 94, 68, 89, 84 };
 
             provider.Save(inputFile, outputFile, saveData);
+
+            // Travis test:
+            Console.WriteLine(outputFile);
+            Console.WriteLine(System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(outputFile)));
+            Console.WriteLine(System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(expectedFile)));
 
             try
             {
@@ -44,7 +49,7 @@ namespace Stenography.Storage.Tests
         {
             LsbStorageProvider provider = new LsbStorageProvider();
             string inputFile = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage0.png");
-            string outputFile = Path.GetTempFileName();
+            string outputFile = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}.png");
             byte[] saveData = { 66, 83, 94, 68, 89, 84, 66, 83, 94, 68, 89, 84 };
 
             try
@@ -63,10 +68,6 @@ namespace Stenography.Storage.Tests
             LsbStorageProvider provider = new LsbStorageProvider();
             string filename = Path.Combine(TestContext.CurrentContext.TestDirectory, $"Resources{Path.DirectorySeparatorChar}TestImage1.png");
             byte[] expected = { 66, 83, 94, 68, 89, 84 };
-
-            // Travis test:
-            Console.WriteLine(filename);
-            Console.WriteLine(System.Text.Encoding.UTF8.GetString(File.ReadAllBytes(filename)));
 
             byte[] actual = provider.Read(filename);
 
