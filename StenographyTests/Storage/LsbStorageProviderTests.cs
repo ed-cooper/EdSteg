@@ -1,12 +1,34 @@
 ﻿using System;
 using System.IO;
 using NUnit.Framework;
+using Stenography.Noise;
 
 namespace Stenography.Storage.Tests
 {
     [TestFixture]
     public class LsbStorageProviderTests
     {
+        [Test]
+        public void SaveTest()
+        {
+            LsbStorageProvider provider = new LsbStorageProvider(new ConstantNoiseProvider());
+            string inputFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage0.png");
+            string outputFile = Path.GetTempFileName();
+            string expectedFile = Path.Combine(TestContext.CurrentContext.TestDirectory, @"Resources\TestImage1.png");
+            byte[] saveData = { 66, 83, 94, 68, 89, 84 };
+
+            provider.Save(inputFile, outputFile, saveData);
+
+            try
+            {
+                FileAssert.AreEqual(expectedFile, outputFile);
+            }
+            finally
+            {
+                File.Delete(outputFile);
+            }
+        }
+
         [Test]
         public void ReadTest()
         {
