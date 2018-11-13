@@ -17,3 +17,6 @@ I have since updated it to reflect better coding practices and add unit testing 
 
 ### Decrypt Form
 ![Decrypt Form](Screenshots/Screenshot%203.png)
+
+## Class Diagram
+![Class Diagram](Screenshots/Class%20Diagram.png)
